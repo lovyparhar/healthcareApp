@@ -1,0 +1,78 @@
+<div class="container">
+    <div class="row justify-content-center row-content">
+  
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header text-center text-white bg-primary">
+            <h2>Login Form</h2>
+          </div>
+  
+          <div class="card-body">
+  
+  
+            <!-- FORM STARTS HERE -->
+            <form novalidate [formGroup]="loginForm" #fform="ngForm" (ngSubmit)="login()">
+  
+              <div class="form-group row form-row align-items-center justify-content-center">
+                <div class="col-12 form-label">
+                  <label for="adhaar">Adhaar</label>
+                </div>
+  
+                <div class="col-12">
+                  <input name="adhaar" type="text" formControlName="adhaar"
+                    [ngClass]="{'form-control': true, 'is-invalid':formErrors.adhaar}" id="adhaar" required
+                    placeholder="Adhaar Number" />
+                </div>
+                <span *ngIf="formErrors.adhaar" class="text-danger">
+                  {{formErrors.adhaar}}
+                </span>
+              </div>
+  
+              <div class="form-group row form-row align-items-center justify-content-center">
+                <div class="col-12 form-label">
+                  <label for="password">Password</label>
+                </div>
+  
+                <div class="col-12">
+                  <input name="password" type="password" formControlName="password"
+                    [ngClass]="{'form-control': true, 'is-invalid':formErrors.password}" id="password"
+                    placeholder="Password">
+                </div>
+                <span *ngIf="formErrors.password" class="text-danger">
+                  {{formErrors.password}}
+                </span>
+              </div>
+  
+              <div class="row">
+                <div class="col-12 ms-3">
+                  <a routerLink="/forgot_password" style="padding-left: 0; padding-right: 0;">Forgot Password?</a>
+                </div>
+              </div>
+  
+              <div class="form-group row form-row mt-3">
+                <div class="col-12">
+                  <button type="submit" class="btn btn-primary col-12" [disabled]="loginForm.invalid">Login</button>
+                </div>
+              </div>
+  
+              <div class="row register-link">
+                <div class="col-12">
+                  New user? <a routerLink="/register" style="padding-left: 0; padding-right: 0;">Click here</a> to
+                  register.
+                </div>
+              </div>
+  
+              <div class="row register-link">
+                <div class="col-12">
+                  To change password, <a routerLink="/change_password" style="padding-left: 0; padding-right: 0;">Click
+                    here</a>.
+                </div>
+              </div>
+  
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
