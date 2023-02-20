@@ -17,10 +17,11 @@ export class PatientAuthenticationService {
   ) { }
 
   login(username: string, password: string) {
-    let postUrl = (this.globalService.patientRootUrl + '/login')
+    let postUrl = (this.globalService.patientRootUrl + '/auth/login')
+    console.log(postUrl);
     
     return this.http.post<any>(postUrl,
-      {username: username, password: password})
+      {aadhar: username, password: password})
       .pipe(map(credentials => {
         console.log("The Username and password", username , " ", password);
         console.log("The Credentials is ", credentials);
