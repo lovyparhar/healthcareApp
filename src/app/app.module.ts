@@ -14,6 +14,7 @@ import { PatientPortalComponent } from './patient-portal/patient-portal.componen
 import { HospitalPortalComponent } from './hospital-portal/hospital-portal.component';
 import { GlobalService } from './_services/global.service';
 import { PatientLoginComponent } from './patient-login/patient-login.component';
+import { PatientRegisterComponent } from './patient-register/patient-register.component';
 
 @NgModule({
   declarations: [
@@ -24,6 +25,7 @@ import { PatientLoginComponent } from './patient-login/patient-login.component';
     PatientPortalComponent,
     HospitalPortalComponent,
     PatientLoginComponent,
+    PatientRegisterComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, ReactiveFormsModule,HttpClientModule,MatDialogModule],
   providers: [GlobalService],

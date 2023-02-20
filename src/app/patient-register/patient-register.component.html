@@ -1,0 +1,158 @@
+<div class="container">
+  <div class="row justify-content-center row-content">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center text-white bg-primary">
+          <h2>register Form</h2>
+        </div>
+
+        <div class="card-body">
+          <!-- FORM STARTS HERE -->
+          <form
+            novalidate
+            [formGroup]="registerForm"
+            #fform="ngForm"
+            (ngSubmit)="register()"
+          >
+            <div
+              class="form-group row form-row align-items-center justify-content-center"
+            >
+              <div class="col-12 form-label">
+                <label for="firstName">First Name</label>
+              </div>
+
+              <div class="col-12">
+                <input
+                  name="firstName"
+                  type="text"
+                  formControlName="firstName"
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': formErrors.firstName
+                  }"
+                  id="firstName"
+                  required
+                  placeholder="First Name"
+                />
+              </div>
+              <span *ngIf="formErrors.firstName" class="text-danger">
+                {{ formErrors.firstName }}
+              </span>
+            </div>
+            <div
+              class="form-group row form-row align-items-center justify-content-center"
+            >
+              <div class="col-12 form-label">
+                <label for="lastName">Last Name</label>
+              </div>
+
+              <div class="col-12">
+                <input
+                  name="lastName"
+                  type="text"
+                  formControlName="lastName"
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': formErrors.lastName
+                  }"
+                  id="lastName"
+                  required
+                  placeholder="Last Name"
+                />
+              </div>
+              <span *ngIf="formErrors.lastName" class="text-danger">
+                {{ formErrors.lastName }}
+              </span>
+            </div>
+            <div
+              class="form-group row form-row align-items-center justify-content-center"
+            >
+              <div class="col-12 form-label">
+                <label for="email">Email</label>
+              </div>
+
+              <div class="col-12">
+                <input
+                  name="email"
+                  type="text"
+                  formControlName="email"
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': formErrors.email
+                  }"
+                  id="email"
+                  required
+                  placeholder="Email"
+                />
+              </div>
+              <span *ngIf="formErrors.email" class="text-danger">
+                {{ formErrors.email }}
+              </span>
+            </div>
+            <div
+              class="form-group row form-row align-items-center justify-content-center"
+            >
+              <div class="col-12 form-label">
+                <label for="adhaar">Adhaar</label>
+              </div>
+
+              <div class="col-12">
+                <input
+                  name="adhaar"
+                  type="text"
+                  formControlName="adhaar"
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': formErrors.adhaar
+                  }"
+                  id="adhaar"
+                  required
+                  placeholder="Adhaar Number"
+                />
+              </div>
+              <span *ngIf="formErrors.adhaar" class="text-danger">
+                {{ formErrors.adhaar }}
+              </span>
+            </div>
+
+            <div
+              class="form-group row form-row align-items-center justify-content-center"
+            >
+              <div class="col-12 form-label">
+                <label for="password">Password</label>
+              </div>
+
+              <div class="col-12">
+                <input
+                  name="password"
+                  type="password"
+                  formControlName="password"
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': formErrors.password
+                  }"
+                  id="password"
+                  placeholder="Password"
+                />
+              </div>
+              <span *ngIf="formErrors.password" class="text-danger">
+                {{ formErrors.password }}
+              </span>
+            </div>
+            <div class="form-group row form-row mt-3">
+              <div class="col-12">
+                <button
+                  type="submit"
+                  class="btn btn-primary col-12"
+                  [disabled]="registerForm.invalid"
+                >
+                  Register
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
