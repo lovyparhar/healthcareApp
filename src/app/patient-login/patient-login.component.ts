@@ -99,14 +99,14 @@ export class PatientLoginComponent implements OnInit {
     this.authenticationService.login(adhaar, password).subscribe(
       (data: any) => {
         // this.postLogin();
-        this.modalService.displayOkDialog('Login Successful!', '');
+        // this.modalService.displayOkDialog('Login Successful!', '');
       },
       (error: any) => {
         console.log(error);
-        this.modalService.displayOkDialog(
-          'Login Error',
-          'The username/password is not valid.'
-        );
+        // this.modalService.displayOkDialog(
+        //   'Login Error',
+        //   'The username/password is not valid.'
+        // );
       }
     );
     // }
@@ -116,5 +116,5 @@ export class PatientLoginComponent implements OnInit {
     this.globalService.eraseCredentials();
   }
 
-  ngOnInit(): void {}
+  ngOnInit(): void { }
 }
