@@ -9,7 +9,6 @@ export const routes: Routes = [
     { path: 'home', component: HomeComponent },
     { path: '', component: HomeComponent },
     { path: 'patientPortal', component: PatientPortalComponent },
-    { path: 'register', component: PatientRegisterComponent },
     { path: 'patientPortal/register', component: PatientRegisterComponent },
     { path: 'hospitalPortal', component: HospitalPortalComponent }
   ];

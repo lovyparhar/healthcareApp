@@ -1,1 +1,62 @@
-<p>navbar works!</p>
+<nav class="navbar fixed-top navbar-expand-md bg-info shadow" id="menu">
+  <!-- The container for the navbar content -->
+  <div class="container">
+    <!-- The title -->
+    <div class="container text-white">
+      <h1>HealthCare App</h1>
+    </div>
+
+    <!-- If user logged in, write a welcome note on the navbar -->
+    <div class="container text-white">
+      <span id="welcome">{{
+        globalservice.currentCredentials
+          ? "Welcome " + globalservice.currentCredentials.user.short_name
+          : ""
+      }}</span>
+    </div>
+
+    <!-- The button for toggling, displayed on smaller screens -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarSupportedContent"
+      aria-controls="navbarSupportedContent"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a class="nav-link" routerLink="/"> Home </a>
+        </li>
+
+        <li class="nav-item" *ngIf="!globalservice.currentCredentials">
+          <a class="nav-link" routerLink="/register">Register</a>
+        </li>
+
+        <li class="nav-item" *ngIf="!globalservice.currentCredentials">
+          <a class="nav-link" routerLink="/login">Login</a>
+        </li>
+
+        <li class="nav-item" *ngIf="globalservice.currentCredentials">
+          <a class="nav-link" routerLink="/candidate_dashboard">Application</a>
+        </li>
+
+        <li class="nav-item">
+          <a
+            *ngIf="globalservice.currentCredentials"
+            class="nav-link"
+            (click)="logout()"
+            >Logout</a
+          >
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+<div style="height: 8rem"></div>
