@@ -98,7 +98,7 @@ export class PatientLoginComponent implements OnInit {
 
     this.authenticationService.login(adhaar, password).subscribe(
       (data: any) => {
-        // this.postLogin();
+        this.postLogin();
         // this.modalService.displayOkDialog('Login Successful!', '');
       },
       (error: any) => {
@@ -111,7 +111,10 @@ export class PatientLoginComponent implements OnInit {
     );
     // }
   }
-
+  postLogin()
+  {
+    console.log("Hello dashboard")
+  }
   logout() {
     this.globalService.eraseCredentials();
   }

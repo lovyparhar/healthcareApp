@@ -4,7 +4,7 @@ import { Injectable } from '@angular/core';
   providedIn: 'root',
 })
 export class GlobalService {
-  patientRootUrl: string = 'http://127.0.0.1:8080';
+  patientRootUrl: string = 'http://127.0.0.1:8082';
   constructor() {}
 
   saveCredentials(cred: string): void {

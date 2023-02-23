@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
+import { GlobalService } from './_services/global.service';
 
 @Component({
   selector: 'app-root',
@@ -10,13 +11,16 @@ import * as SockJS from 'sockjs-client';
 export class AppComponent {
   title = 'healthcareApp';
 
-  private serverUrl = 'http://localhost:8080/patientSocket'
+  private serverUrl = 'http://localhost:8082/patientSocket'
   private stompClient!: Stomp.Client;
 
-  constructor() {
+  constructor(public globalservice: GlobalService,) {
     this.initializeWebSocketConnection();
   }
-
+  ngOnInit()
+  {
+    this.globalservice.eraseCredentials();
+  }
   initializeWebSocketConnection(){
     let ws: WebSocket = new SockJS(this.serverUrl);
     this.stompClient = Stomp.over(ws);
