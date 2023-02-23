@@ -1,0 +1,20 @@
+<mat-sidenav-container class="example-sidenav-container" [style.marginTop.px]="mobileQuery.matches ? 56 : 0">
+    <mat-sidenav #snav [mode]="mode">
+        <mat-nav-list>
+            <div class="mobile-sidenav" *ngIf="external !== 'true'">
+                <a mat-list-item>
+                    <mat-icon class=" sidebar_icon ">person</mat-icon> {{userName}}
+                </a>
+            </div>
+
+            <a mat-list-item [routerLink]="[{outlets:{ sidenavoutlet:['userinfo'] }}]"> User Information </a>
+            <a mat-list-item [routerLink]="[{outlets:{ sidenavoutlet:['medicalrecords'] }}]"> Medical Records </a>
+            <a mat-list-item [routerLink]="[{outlets:{ sidenavoutlet:['viewconsents'] }}]"> View Consents</a>
+            <a mat-list-item routerLink="."> About us</a>
+        </mat-nav-list>
+    </mat-sidenav>
+    <mat-sidenav-content class="sidenavstyle">
+        <router-outlet name='sidenavoutlet'></router-outlet>
+    </mat-sidenav-content>
+
+</mat-sidenav-container>
