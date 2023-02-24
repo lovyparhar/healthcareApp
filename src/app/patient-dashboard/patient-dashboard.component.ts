@@ -6,8 +6,9 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./patient-dashboard.component.scss']
 })
 export class PatientDashboardComponent implements OnInit {
+  userName: string;
 
-  constructor() { }
+  constructor() {this.userName = "GGGG" }
 
   ngOnInit(): void {
   }

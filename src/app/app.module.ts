@@ -10,6 +10,7 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
+import { MatIconModule } from '@angular/material/icon';
 
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -19,6 +20,9 @@ import { GlobalService } from './_services/global.service';
 import { PatientLoginComponent } from './patient-login/patient-login.component';
 import { PatientRegisterComponent } from './patient-register/patient-register.component';
 import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard.component';
+import { ComposeConsentComponent } from './compose-consent/compose-consent.component';
+import { MedicalRecordsComponent } from './medical-records/medical-records.component';
+import { PendingConsentsComponent } from './pending-consents/pending-consents.component';
 
 @NgModule({
   declarations: [
@@ -31,6 +35,9 @@ import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard
     PatientLoginComponent,
     PatientRegisterComponent,
     PatientDashboardComponent,
+    ComposeConsentComponent,
+    MedicalRecordsComponent,
+    PendingConsentsComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,7 +49,8 @@ import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard
     HttpClientModule,
     MatDialogModule,
     MatSidenavModule,
-    MatListModule
+    MatListModule,
+    MatIconModule,
   ],
   providers: [GlobalService],
   bootstrap: [AppComponent],
