@@ -1,0 +1,248 @@
+/* .navbackground {
+    background-color: #813d7e;
+    color: #fff;
+    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+} */
+
+.example-container {
+    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: 0;
+}
+
+.example-toolbar {
+    background-color: #813d7e;
+    color: #fff;
+    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+}
+
+.example-is-mobile .example-toolbar {
+    position: fixed;
+    /* Make sure the toolbar will stay on top of the content as it scrolls past. */
+    z-index: 2;
+}
+
+h1.example-app-name {
+    margin-left: 8px;
+}
+
+.example-sidenav-container {
+    /* When the sidenav is not fixed, stretch the sidenav container to fill the available space. This
+       causes `<mat-sidenav-content>` to act as our scrolling element for desktop layouts. */
+    flex: 1;
+}
+
+.example-is-mobile .example-sidenav-container {
+    /* When the sidenav is fixed, don't constrain the height of the sidenav container. This allows the
+       `<body>` to be our scrolling element for mobile layouts. */
+    flex: 1 0 auto;
+}
+
+#menu {
+    float: right;
+}
+
+mat-sidenav {
+    width: 300px;
+}
+
+
+/* Mobile Nav */
+
+@media (min-width: 766px) {
+    .mobile-sidenav {
+        display: none;
+    }
+}
+
+
+/* 
+ ::ng-deep .navbar {
+    padding: 0 !important;
+} */
+
+@media (max-width: 766px) {
+    .sidenav {
+        display: none;
+    }
+    .sidenav_calls {
+        padding: 6px 8px 0 0;
+    }
+    .OpenMenuButton {
+        cursor: pointer;
+        position: fixed;
+        top: 0;
+        padding: 10px 20px;
+        right: 0;
+        z-index: 99999999;
+    }
+    .OpenMenuButton mat-icon {
+        font-size: 30px !important;
+        color: #fff;
+    }
+    .DrawerMenu {
+        position: fixed;
+        z-index: 99;
+        width: 100vw;
+        height: 100vh;
+        top: 0;
+        bottom: 0;
+        transform: translateX(-100%);
+        transition: transform 0.5s cubic-bezier(0.4, 0.0, 0.2, 1);
+        display: grid;
+        grid-template-areas: 'MENU OVERLAY';
+        grid-template-columns: 10fr 5fr;
+        z-index: 999999;
+    }
+    [data-menu]:checked~.DrawerMenu {
+        transform: none
+    }
+    .Menu {
+        display: block;
+        flex-flow: column wrap;
+        transform: translateX(-30%);
+        opacity: 0;
+        color: #813d7e;
+        transition: all 500ms cubic-bezier(0.4, 0.0, 0.2, 1);
+        transition-delay: 0;
+        contain: content;
+        grid-area: 'MENU';
+        background-color: #fff;
+        box-sizing: border-box;
+        padding: 16px;
+        box-shadow: 0px 6px 18px rgba(0, 0, 0, 0.06) !important;
+        overflow: auto;
+        -webkit-overflow-scrolling: touch
+    }
+    [data-menu]:checked~.DrawerMenu .Menu {
+        transform: none;
+        opacity: 1;
+        transition-delay: 300ms
+    }
+    .Menu a {
+        text-decoration: none;
+        color: #242424;
+        display: block;
+        padding: 16px 0;
+        font-size: 16px;
+        cursor: pointer;
+    }
+    .Menu .sidenav_chart h6 {
+        font-size: 12px;
+        font-weight: 300;
+        color: #fff;
+    }
+    .Menu a:hover {
+        color: #1b1b1b;
+    }
+    .Menu>*+* {
+        border-top: 1px solid #c8c8c8;
+    }
+    .MenuOverlay {
+        display: block;
+        grid-area: 'OVERLAY'
+    }
+    [data-menu]:not(:checked)~.DrawerMenu .MenuOverlay {
+        pointer-events: none
+    }
+}
+
+@media (min-width: 30em) {
+    .DrawerMenu {
+        grid-template-columns: 2fr 10fr
+    }
+    .Menu {
+        min-width: 250px
+    }
+}
+
+.sidebar_icon {
+    font-size: 15px;
+    display: inline;
+    vertical-align: middle;
+    position: relative;
+    top: -1.2px;
+    padding-right: 2px;
+}
+
+.sidebar_icon_arrow {
+    font-size: 15px;
+    display: inline;
+    vertical-align: middle;
+    position: relative;
+    top: 0px;
+    padding-right: 2px;
+}
+
+.sidebar_icon1 {
+    font-size: 22px;
+    margin-right: 4px;
+    display: inline;
+    vertical-align: middle;
+    position: relative;
+    top: -1px;
+    background-color: #FFEBFE;
+    color: #C07CBD;
+    padding: 3px;
+    border-radius: 50%;
+}
+
+.links {
+    cursor: pointer;
+}
+
+.navbar-brand {
+    display: inline-block;
+    font-size: 17px;
+    line-height: inherit;
+    white-space: nowrap;
+}
+
+img {
+    width: 45px;
+    position: relative;
+    top: 2px;
+    left: 2px;
+}
+
+.navbar-header {
+    cursor: pointer;
+}
+
+.example-spacer {
+    flex: 1 1 auto;
+}
+
+
+/* .sidenav {
+    margin-left: 75%;
+} */
+
+.sidenav span {
+    margin: 0 0.5rem;
+}
+
+.sidenav a {
+    font-size: 17px;
+}
+
+.sidenav a:hover {
+    opacity: 0.9;
+}
+
+.fixed-top {
+    z-index: 999;
+}
+
+.pointer {
+    cursor: pointer;
+}
+
+.username:hover {
+    opacity: 0.8 !important;
+}

@@ -14,8 +14,6 @@ import { MatIconModule } from '@angular/material/icon';
 
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
-import { PatientPortalComponent } from './patient-portal/patient-portal.component';
-import { HospitalPortalComponent } from './hospital-portal/hospital-portal.component';
 import { GlobalService } from './_services/global.service';
 import { PatientLoginComponent } from './patient-login/patient-login.component';
 import { PatientRegisterComponent } from './patient-register/patient-register.component';
@@ -24,6 +22,10 @@ import { ComposeConsentComponent } from './compose-consent/compose-consent.compo
 import { MedicalRecordsComponent } from './medical-records/medical-records.component';
 import { PendingConsentsComponent } from './pending-consents/pending-consents.component';
 import { JwtInterceptor } from './jwt.interceptor';
+import { InfoDialogComponent } from './info-dialog/info-dialog.component';
+import { NavigationComponent } from './navigation/navigation.component';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -31,14 +33,14 @@ import { JwtInterceptor } from './jwt.interceptor';
     NavbarComponent,
     FooterComponent,
     HomeComponent,
-    PatientPortalComponent,
-    HospitalPortalComponent,
     PatientLoginComponent,
     PatientRegisterComponent,
     PatientDashboardComponent,
     ComposeConsentComponent,
     MedicalRecordsComponent,
     PendingConsentsComponent,
+    InfoDialogComponent,
+    NavigationComponent,
   ],
   imports: [
     BrowserModule,
@@ -52,15 +54,17 @@ import { JwtInterceptor } from './jwt.interceptor';
     MatSidenavModule,
     MatListModule,
     MatIconModule,
+    MatToolbarModule,
+    MatMenuModule,
   ],
   providers: [
     GlobalService,
     {
       provide: HTTP_INTERCEPTORS,
       useClass: JwtInterceptor,
-      multi: true
-    }
+      multi: true,
+    },
   ],
   bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}

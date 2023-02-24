@@ -123,8 +123,8 @@ export class PatientRegisterComponent implements OnInit {
       .register(firstName, lastName, email, adhaar, password)
       .subscribe(
         (data: any) => {
-          // this.postregister();
-          // this.modalService.displayOkDialog('register Successful!', '');
+          this.postregister();
+          this.modalService.displayOkDialog('register Successful!', '');
         },
         (error: any) => {
           console.log(error);
@@ -135,6 +135,10 @@ export class PatientRegisterComponent implements OnInit {
         }
       );
     // }
+  }
+  postregister()
+  {
+    this.router.navigate(['home']);
   }
   ngOnInit(): void {}
 }

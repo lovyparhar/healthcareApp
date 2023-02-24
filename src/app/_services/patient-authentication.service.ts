@@ -57,10 +57,6 @@ export class PatientAuthenticationService {
           console.log('The Credentials is ', credentials);
 
           // login successful if there's a jwt token in the response
-          if (credentials) {
-            this.globalService.saveCredentials(JSON.stringify(credentials));
-          }
-
           return credentials;
         })
       );
