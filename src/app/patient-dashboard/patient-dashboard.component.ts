@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { PatientAuthenticationService } from '../_services/patient-authentication.service';
 
 @Component({
   selector: 'app-patient-dashboard',
@@ -8,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 export class PatientDashboardComponent implements OnInit {
   userName: string;
 
-  constructor() {this.userName = "GGGG" }
+  constructor(private authenticationService: PatientAuthenticationService) {this.userName = "GGGG" }
 
   ngOnInit(): void {
+  }
+
+  sayHello() {
+    this.authenticationService.hello().subscribe(
+      (message) => {
+        console.log(message);
+      }
+    );
   }
 
 }

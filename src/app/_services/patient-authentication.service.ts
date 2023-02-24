@@ -65,6 +65,15 @@ export class PatientAuthenticationService {
         })
       );
   }
+
+  hello() {
+    let postUrl = this.globalService.patientRootUrl + '/hello';
+    console.log(postUrl);
+
+    return this.http
+      .get<any>(postUrl);
+  }
+
   logout() {
     // return this.http.post((this.globalService.patientRootUrl + '/logout'), {});
   }

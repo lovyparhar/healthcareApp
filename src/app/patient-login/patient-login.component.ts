@@ -111,9 +111,11 @@ export class PatientLoginComponent implements OnInit {
     );
     // }
   }
+
   postLogin()
   {
-    console.log("Hello dashboard")
+    console.log("Hello dashboard");
+    this.router.navigate(['/patientPortal/dashboard']);
   }
   logout() {
     this.globalService.eraseCredentials();

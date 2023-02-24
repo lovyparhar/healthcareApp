@@ -23,6 +23,7 @@ import { PatientDashboardComponent } from './patient-dashboard/patient-dashboard
 import { ComposeConsentComponent } from './compose-consent/compose-consent.component';
 import { MedicalRecordsComponent } from './medical-records/medical-records.component';
 import { PendingConsentsComponent } from './pending-consents/pending-consents.component';
+import { JwtInterceptor } from './jwt.interceptor';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,14 @@ import { PendingConsentsComponent } from './pending-consents/pending-consents.co
     MatListModule,
     MatIconModule,
   ],
-  providers: [GlobalService],
+  providers: [
+    GlobalService,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: JwtInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent],
 })
-export class AppModule {}
+export class AppModule { }

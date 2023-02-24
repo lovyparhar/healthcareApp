@@ -9,10 +9,10 @@ export class JwtInterceptor implements HttpInterceptor {
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     // Intercepts every http request to the server and adds the JWT token to the header
-    if (this.globalservice.currentCredentials && this.globalservice.currentCredentials.access_token) {
+    if (this.globalservice.currentCredentials && this.globalservice.currentCredentials.token) {
         request = request.clone({
             setHeaders: {
-                Authorization: `Bearer ${this.globalservice.currentCredentials.access_token}`
+                Authorization: `Bearer ${this.globalservice.currentCredentials.token}`
             }
         });
     }
