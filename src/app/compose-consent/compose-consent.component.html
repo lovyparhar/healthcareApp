@@ -1,1 +1,100 @@
-<p>compose-consent works!</p>
+<div class="container">
+  <div class="row justify-content-center row-content">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center text-white bg-info">
+          <h2>Consent Form</h2>
+        </div>
+
+        <div class="card-body">
+          <!-- FORM STARTS HERE -->
+          <form
+            novalidate
+            [formGroup]="consentForm"
+            #fform="ngForm"
+            (ngSubmit)="composeConsent()"
+          >
+            <div
+              class="form-group row form-row align-items-center justify-content-center"
+            >
+              <div class="col-md-6">
+                <label for="sourcehospital form-label">Source Hospital</label>
+                <select
+                  name="sourcehospital"
+                  formControlName="sourcehospital"
+                  required
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': formErrors.sourcehospital
+                  }"
+                >
+                  <option disabled>Select Source Hospital</option>
+                  <option *ngFor="let hospital of sourceHospitals">
+                    {{ hospital }}
+                  </option>
+                </select>
+                <span *ngIf="formErrors.sourcehospital" class="text-danger">
+                  {{ formErrors.sourcehospital }}
+                </span>
+              </div>
+              <div class="col-md-6">
+                <label for="destinationhospital form-label">Destination Hospital</label>
+                <select
+                  name="destinationhospital"
+                  formControlName="destinationhospital"
+                  required
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': formErrors.destinationhospital
+                  }"
+                >
+                  <option disabled>Select Destination Hospital</option>
+                  <option *ngFor="let hospital of destinationHospitals">
+                    {{ hospital }}
+                  </option>
+                </select>
+                <span *ngIf="formErrors.destinationhospital" class="text-danger">
+                  {{ formErrors.destinationhospital }}
+                </span>
+              </div>
+            </div>
+
+            <div
+              class="form-group row form-row align-items-center justify-content-center"
+            >
+            <mat-form-field appearance="outline">
+                <mat-label>Enter a date range</mat-label>
+                <mat-date-range-input [rangePicker]="picker">
+                  <input matStartDate formControlName="startdate" placeholder="Start date">
+                  <input matEndDate formControlName="enddate" placeholder="End date">
+                </mat-date-range-input>
+                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
+                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+                <mat-date-range-picker #picker></mat-date-range-picker>
+<!--               
+                <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
+                <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error> -->
+              </mat-form-field>
+              <span *ngIf="formErrors.password" class="text-danger">
+                {{ formErrors.password }}
+              </span>
+            </div>
+
+            <div class="form-group row form-row mt-3">
+              <div class="col-12">
+                <button
+                  type="submit"
+                  class="btn btn-info col-12 text-center text-white"
+                  [disabled]="consentForm.invalid"
+                >
+                  Compose Consent
+                </button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

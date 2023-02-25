@@ -1,25 +1,20 @@
 import { Component, OnInit } from '@angular/core';
+import { GlobalService } from '../_services/global.service';
 import { PatientAuthenticationService } from '../_services/patient-authentication.service';
 
 @Component({
   selector: 'app-patient-dashboard',
   templateUrl: './patient-dashboard.component.html',
-  styleUrls: ['./patient-dashboard.component.scss']
+  styleUrls: ['./patient-dashboard.component.scss'],
 })
 export class PatientDashboardComponent implements OnInit {
-  userName: string;
 
-  constructor(private authenticationService: PatientAuthenticationService) {this.userName = "GGGG" }
-
-  ngOnInit(): void {
+  constructor(
+    public globalservice: GlobalService,
+    private authenticationService: PatientAuthenticationService
+  ) {
   }
 
-  sayHello() {
-    this.authenticationService.hello().subscribe(
-      (message) => {
-        console.log(message);
-      }
-    );
-  }
+  ngOnInit(): void {}
 
 }

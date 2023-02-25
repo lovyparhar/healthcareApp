@@ -11,6 +11,11 @@ import { CommonModule } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatNativeDateModule } from '@angular/material/core';
+import { MatDatepickerModule } from '@angular/material/datepicker';
 
 import { HomeComponent } from './home/home.component';
 import { AppRoutingModule } from './app-routing.module';
@@ -24,8 +29,6 @@ import { PendingConsentsComponent } from './pending-consents/pending-consents.co
 import { JwtInterceptor } from './jwt.interceptor';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { NavigationComponent } from './navigation/navigation.component';
-import { MatToolbarModule } from '@angular/material/toolbar';
-import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -56,6 +59,9 @@ import { MatMenuModule } from '@angular/material/menu';
     MatIconModule,
     MatToolbarModule,
     MatMenuModule,
+    MatFormFieldModule,
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   providers: [
     GlobalService,
@@ -64,6 +70,8 @@ import { MatMenuModule } from '@angular/material/menu';
       useClass: JwtInterceptor,
       multi: true,
     },
+    MatDatepickerModule,
+    MatNativeDateModule,
   ],
   bootstrap: [AppComponent],
 })
