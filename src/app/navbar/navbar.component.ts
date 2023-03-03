@@ -28,6 +28,7 @@ export class NavbarComponent implements OnInit {
       // If the user wants to log out
       if(result === "y") {
         this.globalservice.eraseCredentials();
+        this.globalservice.clearRecords();
         this.router.navigate(['']);
         // this.authenticationService.logout()
         // .subscribe(

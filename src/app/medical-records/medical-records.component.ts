@@ -6,6 +6,7 @@ import { Router } from '@angular/router';
 import { GlobalService } from '../_services/global.service';
 import { ModalService } from '../_services/modal.service';
 import { PatientAuthenticationService } from '../_services/patient-authentication.service';
+import { ConsentService } from '../_services/consent.service';
 
 @Component({
   selector: 'app-medical-records',
@@ -14,11 +15,8 @@ import { PatientAuthenticationService } from '../_services/patient-authenticatio
 })
 export class MedicalRecordsComponent implements OnInit {
   getRecordsForm!: FormGroup;
-  @ViewChild('fform') consentFormDirective!: any;
+  @ViewChild('fform') getRecordsFormDirective!: any;
   state: any;
-
-  private serverUrl = 'http://localhost:8082/patientSocket'
-  private stompClient!: Stomp.Client;
 
   formErrors: any = {
     sourcehospital: '',
@@ -37,18 +35,18 @@ export class MedicalRecordsComponent implements OnInit {
       required: 'daterange is required.',
     },
   };
-  sourceHospitals: any = ['H1', 'H2', 'H3'];
+  sourceHospitals: any = ['H1', 'H2'];
 
   constructor(
     private authenticationService: PatientAuthenticationService,
     private router: Router,
     public globalService: GlobalService,
     private formBuilder: FormBuilder,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private consentService: ConsentService
   ) {
     this.createForm();
     this.state = this.router.getCurrentNavigation()?.extras.state;
-    this.initializeWebSocketConnection();
   }
 
   createForm(): void {
@@ -91,24 +89,21 @@ export class MedicalRecordsComponent implements OnInit {
 
   getRecords() {
     console.log(this.getRecordsForm.value);
-  }
+    
+    this.consentService.request_data(this.getRecordsForm.value.sourcehospital)
+    ?.subscribe(
+      (data) => {
+        console.log(data);
+      }
+    );
 
-  ngOnInit(): void {}
-
-  initializeWebSocketConnection(){
-    let ws: WebSocket = new SockJS(this.serverUrl);
-    this.stompClient = Stomp.over(ws);
-    let that = this;
-    that.stompClient.connect({}, function(frame) {
-      that.stompClient.subscribe("/sendData", (message: any) => {
-        that.onMessageReceived(message);
-      });
+    this.getRecordsFormDirective.resetForm();
+    this.getRecordsForm.reset({
+      sourcehospital: '',
+      startdate: '',
+      enddate: '',
     });
   }
 
-  onMessageReceived(message: any) {
-    console.log(message);
-    let data = JSON.parse(message.body);
-    this.globalService.addRecord(data);
-  }
+  ngOnInit(): void { }
 }

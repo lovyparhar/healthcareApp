@@ -50,7 +50,8 @@ export class PatientAuthenticationService {
         lastname: lastname,
         aadhar: aadhar,
         password: password,
-        email: email
+        email: email,
+        dateOfBirth: "24/08/2000"
       })
       .pipe(
         map((credentials) => {

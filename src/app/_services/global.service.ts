@@ -22,9 +22,19 @@ export class GlobalService {
 
   addRecord(record: any) {
     this.recordList.push(record);
+    localStorage.setItem('recordList', JSON.stringify(this.recordList));
   }
 
   clearRecords() {
     this.recordList = [];
+    localStorage.setItem('recordList', JSON.stringify(this.recordList));
+  }
+
+  loadRecords() {
+    this.recordList = [];
+    let lis = localStorage.getItem('recordList');
+    if(lis) {
+      this.recordList = JSON.parse(lis)
+    } 
   }
 }
