@@ -8,57 +8,33 @@
 
         <div class="card-body">
           <!-- FORM STARTS HERE -->
-          <form
-            novalidate
-            [formGroup]="loginForm"
-            #fform="ngForm"
-            (ngSubmit)="login()"
-          >
-            <div
-              class="form-group row form-row align-items-center justify-content-center"
-            >
+          <form novalidate [formGroup]="loginForm" #fform="ngForm" (ngSubmit)="login()">
+            <div class="form-group row form-row align-items-center justify-content-center">
               <div class="col-12 form-label">
-                <label for="adhaar">Aadhaar</label>
+                <label for="aadhar">Aadhar</label>
               </div>
 
               <div class="col-12">
-                <input
-                  name="adhaar"
-                  type="text"
-                  formControlName="adhaar"
-                  [ngClass]="{
+                <input name="aadhar" type="text" formControlName="aadhar" [ngClass]="{
                     'form-control': true,
-                    'is-invalid': formErrors.adhaar
-                  }"
-                  id="adhaar"
-                  required
-                  placeholder="Aadhaar Number"
-                />
+                    'is-invalid': formErrors.aadhar
+                  }" id="aadhar" required placeholder="Aadhar Number" />
               </div>
-              <span *ngIf="formErrors.adhaar" class="text-danger">
-                {{ formErrors.adhaar }}
+              <span *ngIf="formErrors.aadhar" class="text-danger">
+                {{ formErrors.aadhar }}
               </span>
             </div>
 
-            <div
-              class="form-group row form-row align-items-center justify-content-center"
-            >
+            <div class="form-group row form-row align-items-center justify-content-center">
               <div class="col-12 form-label">
                 <label for="password">Password</label>
               </div>
 
               <div class="col-12">
-                <input
-                  name="password"
-                  type="password"
-                  formControlName="password"
-                  [ngClass]="{
+                <input name="password" type="password" formControlName="password" [ngClass]="{
                     'form-control': true,
                     'is-invalid': formErrors.password
-                  }"
-                  id="password"
-                  placeholder="Password"
-                />
+                  }" id="password" placeholder="Password" />
               </div>
               <span *ngIf="formErrors.password" class="text-danger">
                 {{ formErrors.password }}
@@ -67,21 +43,13 @@
 
             <div class="row">
               <div class="col-12 ms-3">
-                <a
-                  routerLink="/forgot_password"
-                  style="padding-left: 0; padding-right: 0"
-                  >Forgot Password?</a
-                >
+                <a routerLink="/reset_password" style="padding-left: 0; padding-right: 0">Forgot Password?</a>
               </div>
             </div>
 
             <div class="form-group row form-row mt-3">
               <div class="col-12">
-                <button
-                  type="submit"
-                  class="btn btn-info col-12 text-center text-white"
-                  [disabled]="loginForm.invalid"
-                >
+                <button type="submit" class="btn btn-info col-12 text-center text-white" [disabled]="loginForm.invalid">
                   Login
                 </button>
               </div>
@@ -90,11 +58,7 @@
             <div class="row register-link">
               <div class="col-12">
                 New user?
-                <a
-                  routerLink="/register"
-                  style="padding-left: 0; padding-right: 0"
-                  >Register</a
-                >
+                <a routerLink="/register" style="padding-left: 0; padding-right: 0">Register</a>
               </div>
             </div>
           </form>

@@ -27,7 +27,7 @@ export class PatientRegisterComponent implements OnInit {
     firstName: '',
     lastName: '',
     email: '',
-    adhaar: '',
+    aadhar: '',
     password: '',
   };
 
@@ -41,8 +41,8 @@ export class PatientRegisterComponent implements OnInit {
     email: {
       required: 'Email is required.',
     },
-    adhaar: {
-      required: 'adhaar is required.',
+    aadhar: {
+      required: 'aadhar is required.',
     },
     password: {
       required: 'Password is required.',
@@ -59,8 +59,8 @@ export class PatientRegisterComponent implements OnInit {
     this.createForm();
     this.state = this.router.getCurrentNavigation()?.extras.state;
 
-    if (this.state && this.state.adhaar) {
-      this.registerForm.get('adhaar')!.setValue(this.state.adhaar);
+    if (this.state && this.state.aadhar) {
+      this.registerForm.get('aadhar')!.setValue(this.state.aadhar);
     }
   }
   createForm(): void {
@@ -68,7 +68,7 @@ export class PatientRegisterComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      adhaar: ['', [Validators.required]],
+      aadhar: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
 
@@ -107,7 +107,7 @@ export class PatientRegisterComponent implements OnInit {
     let firstName = this.registerForm.value.firstName;
     let lastName = this.registerForm.value.lastName;
     let email = this.registerForm.value.email;
-    let adhaar = this.registerForm.value.adhaar;
+    let aadhar = this.registerForm.value.aadhar;
     let password = this.registerForm.value.password;
 
     this.registerFormDirective.resetForm();
@@ -115,12 +115,12 @@ export class PatientRegisterComponent implements OnInit {
       firstName: '',
       lastName: '',
       email: '',
-      adhaar: '',
+      aadhar: '',
       password: '',
     });
 
     this.authenticationService
-      .register(firstName, lastName, email, adhaar, password)
+      .register(firstName, lastName, email, aadhar, password)
       .subscribe(
         (data: any) => {
           this.postregister();

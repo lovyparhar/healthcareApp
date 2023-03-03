@@ -29,6 +29,9 @@ import { PendingConsentsComponent } from './pending-consents/pending-consents.co
 import { JwtInterceptor } from './jwt.interceptor';
 import { InfoDialogComponent } from './info-dialog/info-dialog.component';
 import { NavigationComponent } from './navigation/navigation.component';
+import { ChangePasswordComponent } from './change-password/change-password.component';
+import { ResetPasswordComponent } from './reset-password/reset-password.component';
+import { ResetPasswordOTPComponent } from './reset-password-otp/reset-password-otp.component';
 
 @NgModule({
   declarations: [
@@ -44,6 +47,9 @@ import { NavigationComponent } from './navigation/navigation.component';
     PendingConsentsComponent,
     InfoDialogComponent,
     NavigationComponent,
+    ChangePasswordComponent,
+    ResetPasswordComponent,
+    ResetPasswordOTPComponent,
   ],
   imports: [
     BrowserModule,

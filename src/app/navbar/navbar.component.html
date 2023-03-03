@@ -42,6 +42,10 @@
           <a class="nav-link" routerLink="/login">Login</a>
         </li>
 
+        <li class="nav-item" *ngIf="globalservice.currentCredentials">
+          <a class="nav-link" routerLink="/change_password">Change Password</a>
+        </li>
+
         <li class="nav-item">
           <a
             *ngIf="globalservice.currentCredentials"

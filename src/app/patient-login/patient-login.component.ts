@@ -24,13 +24,13 @@ export class PatientLoginComponent implements OnInit {
   state: any;
 
   formErrors: any = {
-    adhaar: '',
+    aadhar: '',
     password: '',
   };
 
   validationMessages: any = {
-    adhaar: {
-      required: 'adhaar is required.',
+    aadhar: {
+      required: 'aadhar is required.',
     },
     password: {
       required: 'Password is required.',
@@ -47,13 +47,13 @@ export class PatientLoginComponent implements OnInit {
     this.createForm();
     this.state = this.router.getCurrentNavigation()?.extras.state;
 
-    if (this.state && this.state.adhaar) {
-      this.loginForm.get('adhaar')!.setValue(this.state.adhaar);
+    if (this.state && this.state.aadhar) {
+      this.loginForm.get('aadhar')!.setValue(this.state.aadhar);
     }
   }
   createForm(): void {
     this.loginForm = this.formBuilder.group({
-      adhaar: ['', [Validators.required]],
+      aadhar: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
 
@@ -87,16 +87,16 @@ export class PatientLoginComponent implements OnInit {
 
   login() {
     // if (!this.globalService.currentCredentials) {
-    let adhaar = this.loginForm.value.adhaar;
+    let aadhar = this.loginForm.value.aadhar;
     let password = this.loginForm.value.password;
 
     this.loginFormDirective.resetForm();
     this.loginForm.reset({
-      adhaar: '',
+      aadhar: '',
       password: '',
     });
 
-    this.authenticationService.login(adhaar, password).subscribe(
+    this.authenticationService.login(aadhar, password).subscribe(
       (data: any) => {
         this.postLogin();
         this.modalService.displayOkDialog('Login Successful!', '');

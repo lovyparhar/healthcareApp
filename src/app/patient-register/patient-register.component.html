@@ -93,25 +93,25 @@
               class="form-group row form-row align-items-center justify-content-center"
             >
               <div class="col-12 form-label">
-                <label for="adhaar">Adhaar</label>
+                <label for="aadhar">aadhar</label>
               </div>
 
               <div class="col-12">
                 <input
-                  name="adhaar"
+                  name="aadhar"
                   type="text"
-                  formControlName="adhaar"
+                  formControlName="aadhar"
                   [ngClass]="{
                     'form-control': true,
-                    'is-invalid': formErrors.adhaar
+                    'is-invalid': formErrors.aadhar
                   }"
-                  id="adhaar"
+                  id="aadhar"
                   required
-                  placeholder="Adhaar Number"
+                  placeholder="aadhar Number"
                 />
               </div>
-              <span *ngIf="formErrors.adhaar" class="text-danger">
-                {{ formErrors.adhaar }}
+              <span *ngIf="formErrors.aadhar" class="text-danger">
+                {{ formErrors.aadhar }}
               </span>
             </div>
 
