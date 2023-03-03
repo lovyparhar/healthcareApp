@@ -5,6 +5,7 @@ import { Injectable } from '@angular/core';
 })
 export class GlobalService {
   patientRootUrl: string = 'http://127.0.0.1:8082';
+  recordList: any[] = [];
   constructor() {}
 
   saveCredentials(cred: string): void {
@@ -17,5 +18,13 @@ export class GlobalService {
   }
   eraseCredentials(): void {
     localStorage.removeItem('currentCredentials');
+  }
+
+  addRecord(record: any) {
+    this.recordList.push(record);
+  }
+
+  clearRecords() {
+    this.recordList = [];
   }
 }
