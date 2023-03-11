@@ -6,6 +6,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
+import { ConsentService } from '../_services/consent.service';
 import { GlobalService } from '../_services/global.service';
 import { ModalService } from '../_services/modal.service';
 import { PatientAuthenticationService } from '../_services/patient-authentication.service';
@@ -48,7 +49,8 @@ export class ComposeConsentComponent implements OnInit {
     private router: Router,
     private globalService: GlobalService,
     private formBuilder: FormBuilder,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private consentService: ConsentService
   ) {
     this.createForm();
     this.state = this.router.getCurrentNavigation()?.extras.state;
@@ -95,7 +97,23 @@ export class ComposeConsentComponent implements OnInit {
     }
   }
   composeConsent() {
-    console.log(this.consentForm.value);
+    const isoString = this.consentForm.value.startdate
+      .toISOString()
+      .slice(0, 19);
+
+    this.consentService
+      .compose_consent(
+        this.consentForm.value.sourcehospital,
+        this.consentForm.value.destinationhospital,
+        this.consentForm.value.startdate.toISOString().slice(0, 19),
+        this.consentForm.value.enddate.toISOString().slice(0, 19)
+      )
+      ?.subscribe((data) => {
+        this.modalService.displayOkDialog('Consent Created Successfully!', '');
+        // this.router.navigate(['composeconsent']);
+        window.location.reload()
+
+      });
   }
 
   ngOnInit(): void {}

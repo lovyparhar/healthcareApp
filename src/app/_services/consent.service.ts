@@ -7,24 +7,56 @@ const httpOptions = {
 };
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ConsentService {
-
-  constructor(private globalService: GlobalService, private http: HttpClient) { }
+  constructor(private globalService: GlobalService, private http: HttpClient) {}
 
   request_data(sourceHospitalId: string) {
-
-    if(!this.globalService.currentCredentials)
-      return;
+    if (!this.globalService.currentCredentials) return;
 
     let postUrl = this.globalService.patientRootUrl + '/consent/sendConsent';
     console.log(postUrl);
 
     let approved = true;
     let patientId = this.globalService.currentCredentials.aadhar;
-    let destinationHospitalId = "P";
+    let destinationHospitalId = 'P';
 
-    return this.http.post<any>(postUrl, {approved: approved, patientId: patientId, destinationHospitalId: destinationHospitalId, sourceHospitalId: sourceHospitalId });
+    return this.http.post<any>(postUrl, {
+      approved: approved,
+      patientId: patientId,
+      destinationHospitalId: destinationHospitalId,
+      sourceHospitalId: sourceHospitalId,
+    });
+  }
+
+  compose_consent(
+    sourceHospitalId: string,
+    destinationHospitalId: string,
+    startDate: string,
+    endDate: string
+  ) {
+    if (!this.globalService.currentCredentials) return;
+
+    let postUrl = this.globalService.patientRootUrl + '/consent/sendConsent';
+    let approved = false; // Should be always true.
+    let patientId = this.globalService.currentCredentials.aadhar;
+
+    return this.http.post(
+      postUrl,
+      {
+        approved: approved,
+        patientId: patientId,
+        destinationHospitalId: destinationHospitalId,
+        sourceHospitalId: sourceHospitalId,
+        startTime: startDate,
+        endTime: endDate,
+      },
+      { responseType: 'text' }
+    );
+  }
+  getConsents(){
+    let postUrl = this.globalService.patientRootUrl + '/consent/getPendingConsents';
+    return this.http.get(postUrl);
   }
 }
