@@ -11,14 +11,14 @@
           <form novalidate [formGroup]="loginForm" #fform="ngForm" (ngSubmit)="login()">
             <div class="form-group row form-row align-items-center justify-content-center">
               <div class="col-12 form-label">
-                <label for="aadhar">Aadhar</label>
+                <label for="aadhar">Aadhaar</label>
               </div>
 
               <div class="col-12">
                 <input name="aadhar" type="text" formControlName="aadhar" [ngClass]="{
                     'form-control': true,
                     'is-invalid': formErrors.aadhar
-                  }" id="aadhar" required placeholder="Aadhar Number" />
+                  }" id="aadhar" required placeholder="Aadhaar Number" />
               </div>
               <span *ngIf="formErrors.aadhar" class="text-danger">
                 {{ formErrors.aadhar }}

@@ -16,17 +16,25 @@ export class PendingConsentsComponent implements OnInit {
   constructor(
     private authenticationService: PatientAuthenticationService,
     private router: Router,
-    public globalService: GlobalService,
-    private formBuilder: FormBuilder,
     private modalService: ModalService,
+    public globalService: GlobalService,
     private consentService: ConsentService
   ) {}
 
+  approveConsent(consent:any)
+  {
+    console.log(consent);
+    // this.modalService.confirmationDialog('Confirm', 'Are you sure you want to approve this consent?');
+    this.consentService.approveConsent(consent)?.subscribe((data) => {
+      this.modalService.displayOkDialog('Consent Approved', '');
+      // window.location.reload()
+    });
+  }
   ngOnInit(): void {
     if (this.globalService.currentCredentials) {
       this.consentService.getConsents()?.subscribe((data: any) => {
-        console.log(data);
         this.pendingConsentList = data;
+        console.log(this.pendingConsentList);
       });
     }
   }

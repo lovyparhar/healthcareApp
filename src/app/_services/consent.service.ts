@@ -29,7 +29,27 @@ export class ConsentService {
       sourceHospitalId: sourceHospitalId,
     });
   }
+  approveConsent(consent: any) {
+    if (!this.globalService.currentCredentials) return;
+    console.log(consent);
+    let postUrl = this.globalService.patientRootUrl + '/consent/sendConsent';
 
+    let approved = true; // Should be always true.
+    let patientId = this.globalService.currentCredentials.aadhar;
+    return this.http.post(
+      postUrl,
+      {
+        approved: approved,
+        patientId: patientId,
+        destinationHospitalId: consent.destinationHospitalId,
+        sourceHospitalId: consent.sourceHospitalId,
+        department: consent.department,
+        startTime: consent.startTime,
+        endTime: consent.endTime,
+      },
+      { responseType: 'text' }
+    );
+  }
   compose_consent(
     sourceHospitalId: string,
     destinationHospitalId: string,
@@ -55,8 +75,9 @@ export class ConsentService {
       { responseType: 'text' }
     );
   }
-  getConsents(){
-    let postUrl = this.globalService.patientRootUrl + '/consent/getPendingConsents';
+  getConsents() {
+    let postUrl =
+      this.globalService.patientRootUrl + '/consent/getPendingConsents';
     return this.http.get(postUrl);
   }
 }
