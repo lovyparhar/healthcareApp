@@ -107,5 +107,10 @@ export class MedicalRecordsComponent implements OnInit {
       this.recordList = data;
     });
   }
+  clearRecords() {
+    this.consentService.clearRecords()?.subscribe((data) => {
+      window.location.reload();
+    });
+  }
   ngOnInit(): void {}
 }

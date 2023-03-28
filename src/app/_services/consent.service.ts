@@ -80,6 +80,11 @@ export class ConsentService {
       this.globalService.patientRootUrl + '/consent/getPendingConsents';
     return this.http.get(postUrl);
   }
+  clearRecords() {
+    let postUrl =
+      this.globalService.patientRootUrl + '/consent/clear-records';
+    return this.http.get(postUrl);
+  }
   fetchData() {
     let postUrl =
       this.globalService.patientRootUrl + '/consent/getRecords';
