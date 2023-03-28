@@ -1,93 +1,131 @@
 <div class="container">
-    <div class="row justify-content-center row-content p-3 m-2">
-        <div class="col-md-6">
-            <div class="card">
-                <div class="card-header text-center text-white bg-info">
-                    <h2>Fetch Medical Records</h2>
-                </div>
-
-                <div class="card-body">
-                    <!-- FORM STARTS HERE -->
-                    <form novalidate [formGroup]="getRecordsForm" #fform="ngForm" (ngSubmit)="getRecords()">
-                        <div class="form-group row form-row align-items-center justify-content-center">
-                            <div class="col-md-12">
-                                <label for="sourcehospital form-label">Source Hospital</label>
-                                <select name="sourcehospital" formControlName="sourcehospital" required [ngClass]="{
-                      'form-control': true,
-                      'form-select': true,
-                      'is-invalid': formErrors.sourcehospital
-                    }">
-                                    <option disabled selected value="">Select Source Hospital</option>
-                                    <option *ngFor="let hospital of sourceHospitals">
-                                        {{ hospital }}
-                                    </option>
-                                </select>
-                                <span *ngIf="formErrors.sourcehospital" class="text-danger">
-                                    {{ formErrors.sourcehospital }}
-                                </span>
-                            </div>
-                        </div>
-
-                        <div class="form-group row form-row align-items-center justify-content-center">
-                            <mat-form-field appearance="outline">
-                                <mat-label>Enter a date range</mat-label>
-                                <mat-date-range-input [rangePicker]="picker">
-                                    <input matStartDate formControlName="startdate" placeholder="Start date">
-                                    <input matEndDate formControlName="enddate" placeholder="End date">
-                                </mat-date-range-input>
-                                <mat-hint>MM/DD/YYYY – MM/DD/YYYY</mat-hint>
-                                <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
-                                <mat-date-range-picker #picker></mat-date-range-picker>
-                                <!--               
-                  <mat-error *ngIf="range.controls.start.hasError('matStartDateInvalid')">Invalid start date</mat-error>
-                  <mat-error *ngIf="range.controls.end.hasError('matEndDateInvalid')">Invalid end date</mat-error> -->
-                            </mat-form-field>
-                            <span *ngIf="formErrors.password" class="text-danger">
-                                {{ formErrors.password }}
-                            </span>
-                        </div>
-
-                        <div class="form-group row form-row mt-3">
-                            <div class="col-12">
-                                <button type="submit" class="btn btn-info col-12 text-center text-white"
-                                    [disabled]="getRecordsForm.invalid">
-                                    Get Records
-                                </button>
-                            </div>
-                        </div>
-
-                    </form>
-                </div>
-
-
-            </div>
+  <div class="row justify-content-center row-content p-3 m-2">
+    <div class="col-md-6">
+      <div class="card">
+        <div class="card-header text-center text-white bg-info">
+          <h2>Fetch Medical Records</h2>
         </div>
+
+        <div class="card-body">
+          <!-- FORM STARTS HERE -->
+          <form
+            novalidate
+            [formGroup]="getRecordsForm"
+            #fform="ngForm"
+            (ngSubmit)="getRecords()"
+          >
+            <div
+              class="form-group row form-row align-items-center justify-content-center"
+            >
+              <div class="col-md-12">
+                <label for="sourcehospital form-label">Source Hospital</label>
+                <select
+                  name="sourcehospital"
+                  formControlName="sourcehospital"
+                  required
+                  [ngClass]="{
+                    'form-control': true,
+                    'form-select': true,
+                    'is-invalid': formErrors.sourcehospital
+                  }"
+                >
+                  <option disabled selected value="">
+                    Select Source Hospital
+                  </option>
+                  <option *ngFor="let hospital of sourceHospitals">
+                    {{ hospital }}
+                  </option>
+                </select>
+                <span *ngIf="formErrors.sourcehospital" class="text-danger">
+                  {{ formErrors.sourcehospital }}
+                </span>
+              </div>
+            </div>
+
+            <div
+              class="form-group row form-row align-items-center justify-content-center"
+            >
+              <div class="col-12 form-label">
+                <label for="department">Department</label>
+              </div>
+
+              <div class="col-12">
+                <select
+                  name="department"
+                  formControlName="department"
+                  required
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': formErrors.department
+                  }"
+                >
+                  <option disabled>Select Department</option>
+                  <option *ngFor="let dept of departments">
+                    {{ dept }}
+                  </option>
+                </select>
+              </div>
+              <span *ngIf="formErrors.department" class="text-danger">
+                {{ formErrors.department }}
+              </span>
+            </div>
+
+            <div class="form-group row form-row mt-3">
+              <div class="col-12">
+                <button
+                  type="submit"
+                  class="btn btn-info col-12 text-center text-white"
+                  [disabled]="getRecordsForm.invalid"
+                >
+                  Get Records
+                </button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div
+    class="row justify-content-center row-content p-3 m-2"
+    style="background-color: rgb(236, 236, 236)"
+  >
+    <div class="col-md-8 mt-2">
+      <h2>Record List</h2>
+    </div>
+    <div class="col-md-4 mt-2">
+        <button class = "btn btn-info" (click) = "fetchRecords()">Refresh to get Data</button>
+      <button
+        type="submit"
+        class="btn btn-info col-12 text-center text-white"
+        [disabled]="globalService.recordList.length == 0"
+        (click)="globalService.clearRecords()"
+      >
+        Clear Records
+      </button>
     </div>
 
-    <div class="row justify-content-center row-content p-3 m-2" style="background-color:rgb(236, 236, 236);">
-        <div class="col-md-8 mt-2">
-            <h2>Record List</h2>
+    <div
+      class="col-md-10 m-2"
+      *ngFor="let record of recordList; let i = index"
+    >
+      <div class="card">
+        <div class="card-body">
+          <h5 class="card-title">Record number {{ i + 1 }}</h5>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Hospital : {{ record.sourceId }}</li>
+            <li class="list-group-item">
+              Department : {{ record.department }}
+            </li>
+            <li class="list-group-item">Address : {{ record.address }}</li>
+            <li class="list-group-item">Diagnosis : {{ record.diagnosis }}</li>
+            <li class="list-group-item">
+              Prescription : {{ record.prescription }}
+            </li>
+          </ul>
         </div>
-        <div class="col-md-4 mt-2">
-            <button type="submit" class="btn btn-info col-12 text-center text-white"
-                [disabled]="globalService.recordList.length == 0" (click)="globalService.clearRecords()">
-                Clear Records
-            </button>
-        </div>
-
-        <div class="col-md-10 m-2" *ngFor="let record of globalService.recordList; let i = index">
-            <div class="card">
-                <div class="card-body">
-                    <h5 class="card-title">Record number {{i+1}}</h5>
-                    <ul class="list-group list-group-flush">
-                        <li class="list-group-item">Hospital : {{record.sourceId}}</li>
-                        <li class="list-group-item">Department : {{record.department}}</li>
-                        <li class="list-group-item">Address : {{record.address}}</li>
-                        <li class="list-group-item">Diagnosis : {{record.diagnosis}}</li>
-                        <li class="list-group-item">Prescription : {{record.prescription}}</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+      </div>
     </div>
+  </div>
 </div>

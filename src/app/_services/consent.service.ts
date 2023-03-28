@@ -12,21 +12,21 @@ const httpOptions = {
 export class ConsentService {
   constructor(private globalService: GlobalService, private http: HttpClient) {}
 
-  request_data(sourceHospitalId: string) {
+  request_data(recordSenderHospital: string, department: string) {
     if (!this.globalService.currentCredentials) return;
 
-    let postUrl = this.globalService.patientRootUrl + '/consent/sendConsent';
+    let postUrl = this.globalService.patientRootUrl + '/consent/get-records-from-hospital';
     console.log(postUrl);
 
-    let approved = true;
     let patientId = this.globalService.currentCredentials.aadhar;
-    let destinationHospitalId = 'P';
+    let recordRequesterHospital = 'P';
 
     return this.http.post<any>(postUrl, {
-      approved: approved,
       patientId: patientId,
-      destinationHospitalId: destinationHospitalId,
-      sourceHospitalId: sourceHospitalId,
+      department: department,
+      recordRequesterHospital: recordRequesterHospital,
+      recordSenderHospital: recordSenderHospital,
+      requestTime: "2023-03-03T23:24:00"
     });
   }
   approveConsent(consent: any) {
@@ -78,6 +78,11 @@ export class ConsentService {
   getConsents() {
     let postUrl =
       this.globalService.patientRootUrl + '/consent/getPendingConsents';
+    return this.http.get(postUrl);
+  }
+  fetchData() {
+    let postUrl =
+      this.globalService.patientRootUrl + '/consent/getRecords';
     return this.http.get(postUrl);
   }
 }
