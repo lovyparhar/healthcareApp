@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 // import * as Stomp from 'stompjs';
 // import * as SockJS from 'sockjs-client';
 import { GlobalService } from './_services/global.service';
+import { ConsentRequestSocketService } from './_services/consent-request-socket.service';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,13 @@ import { GlobalService } from './_services/global.service';
 export class AppComponent {
   title = 'healthcareApp';
 
-  private serverUrl = 'http://localhost:8082/patientSocket'
+  // private serverUrl = 'http://localhost:8082/patientSocket'
   // private stompClient!: Stomp.Client;
 
-  constructor(public globalService: GlobalService) {
+  constructor(
+    public globalService: GlobalService,
+    private consentRequestSocketService: ConsentRequestSocketService
+  ) {
     // this.initializeWebSocketConnection();
   }
   
@@ -25,6 +29,7 @@ export class AppComponent {
     else {
       this.globalService.clearRecords();
     }
+    this.consentRequestSocketService.initializeWebSocketConnection();
   }
   
   // initializeWebSocketConnection(){
@@ -38,9 +43,9 @@ export class AppComponent {
   //   });
   // }
 
-  onMessageReceived(message: any) {
-    console.log(message);
-    let data = JSON.parse(message.body);
-    this.globalService.addRecord(data);
-  }
+  // onMessageReceived(message: any) {
+  //   console.log(message);
+  //   let data = JSON.parse(message.body);
+  //   this.globalService.addRecord(data);
+  // }
 }

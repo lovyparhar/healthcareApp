@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { GlobalService } from '../_services/global.service';
 import { ModalService } from '../_services/modal.service';
 import { PatientAuthenticationService } from '../_services/patient-authentication.service';
+import { ConsentRequestSocketService } from '../_services/consent-request-socket.service';
 
 @Component({
   selector: 'app-patient-login',
@@ -42,7 +43,8 @@ export class PatientLoginComponent implements OnInit {
     private router: Router,
     private globalService: GlobalService,
     private formBuilder: FormBuilder,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private consentRequestSocketService: ConsentRequestSocketService
   ) {
     this.createForm();
     this.state = this.router.getCurrentNavigation()?.extras.state;
@@ -51,6 +53,7 @@ export class PatientLoginComponent implements OnInit {
       this.loginForm.get('aadhar')!.setValue(this.state.aadhar);
     }
   }
+
   createForm(): void {
     this.loginForm = this.formBuilder.group({
       aadhar: ['', [Validators.required]],
@@ -61,6 +64,7 @@ export class PatientLoginComponent implements OnInit {
 
     this.onValueChanged(); // (re)set form validation messages
   }
+
   onValueChanged(data?: any) {
     if (!this.loginForm) {
       return;
@@ -116,9 +120,14 @@ export class PatientLoginComponent implements OnInit {
   {
     console.log("Hello dashboard");
     this.router.navigate(['dashboard']);
+
+    // Set up a socket connection here
+    this.consentRequestSocketService.initializeWebSocketConnection();
   }
+
   logout() {
     this.globalService.eraseCredentials();
+    this.consentRequestSocketService.closeWebSocketConnection();
   }
 
   ngOnInit(): void { }
