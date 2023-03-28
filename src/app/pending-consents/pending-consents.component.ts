@@ -21,14 +21,21 @@ export class PendingConsentsComponent implements OnInit {
     private consentService: ConsentService
   ) {}
 
-  approveConsent(consent:any)
-  {
+  approveConsent(consent: any) {
     console.log(consent);
-    // this.modalService.confirmationDialog('Confirm', 'Are you sure you want to approve this consent?');
-    this.consentService.approveConsent(consent)?.subscribe((data) => {
-      this.modalService.displayOkDialog('Consent Approved', '');
-      // window.location.reload()
-    });
+    this.modalService
+      .confirmationDialog(
+        'Confirm',
+        'Are you sure you want to approve this consent?'
+      )
+      ?.subscribe((res) => {
+        if (res === 'y') {
+          this.consentService.approveConsent(consent)?.subscribe((data) => {
+            this.modalService.displayOkDialog('Consent Approved', '');
+            window.location.reload();
+          });
+        }
+      });
   }
   ngOnInit(): void {
     if (this.globalService.currentCredentials) {

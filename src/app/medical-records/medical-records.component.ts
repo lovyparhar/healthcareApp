@@ -11,31 +11,28 @@ import { ConsentService } from '../_services/consent.service';
 @Component({
   selector: 'app-medical-records',
   templateUrl: './medical-records.component.html',
-  styleUrls: ['./medical-records.component.scss']
+  styleUrls: ['./medical-records.component.scss'],
 })
 export class MedicalRecordsComponent implements OnInit {
   getRecordsForm!: FormGroup;
   @ViewChild('fform') getRecordsFormDirective!: any;
   state: any;
-
+  recordList: any;
   formErrors: any = {
     sourcehospital: '',
-    startdate: '',
-    enddate: '',
+    department: '',
   };
 
   validationMessages: any = {
     sourcehospital: {
       required: 'Source Hospital is required.',
     },
-    startdate: {
-      required: 'daterange is required.',
-    },
-    enddate: {
+    department: {
       required: 'daterange is required.',
     },
   };
   sourceHospitals: any = ['H1', 'H2'];
+  departments: any = ['All departments', 'Radiology', 'Urology', 'Oncology'];
 
   constructor(
     private authenticationService: PatientAuthenticationService,
@@ -52,8 +49,7 @@ export class MedicalRecordsComponent implements OnInit {
   createForm(): void {
     this.getRecordsForm = this.formBuilder.group({
       sourcehospital: ['', [Validators.required]],
-      startdate: ['', [Validators.required]],
-      enddate: ['', [Validators.required]],
+      department: ['', [Validators.required]],
     });
 
     this.getRecordsForm.valueChanges.subscribe((data) =>
@@ -89,21 +85,27 @@ export class MedicalRecordsComponent implements OnInit {
 
   getRecords() {
     console.log(this.getRecordsForm.value);
-    
-    this.consentService.request_data(this.getRecordsForm.value.sourcehospital)
-    ?.subscribe(
-      (data) => {
+
+    this.consentService
+      .request_data(
+        this.getRecordsForm.value.sourcehospital,
+        this.getRecordsForm.value.department
+      )
+      ?.subscribe((data) => {
         console.log(data);
-      }
-    );
+      });
 
     this.getRecordsFormDirective.resetForm();
     this.getRecordsForm.reset({
       sourcehospital: '',
-      startdate: '',
-      enddate: '',
+      department: '',
     });
   }
-
-  ngOnInit(): void { }
+  fetchRecords() {
+    this.consentService.fetchData()?.subscribe((data) => {
+      console.log(data);
+      this.recordList = data;
+    });
+  }
+  ngOnInit(): void {}
 }
