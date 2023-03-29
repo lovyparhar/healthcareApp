@@ -46,7 +46,7 @@
             <p class="mb-0">Start Time :</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">{{ consent.startTime }}</p>
+            <p class="text-muted mb-0">{{ consent.startTime.slice(0, 10) }}  {{consent.startTime.slice(12)}}</p>
           </div>
         </div>
         <div class="row">
@@ -54,7 +54,7 @@
             <p class="mb-0">End Time :</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">{{ consent.endTime }}</p>
+            <p class="text-muted mb-0">{{ consent.endTime.slice(0, 10) }}  {{consent.endTime.slice(12)}}</p>
           </div>
         </div>
         <hr/>
