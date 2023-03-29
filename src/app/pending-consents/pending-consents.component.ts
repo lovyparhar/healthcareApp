@@ -32,7 +32,12 @@ export class PendingConsentsComponent implements OnInit {
         if (res === 'y') {
           this.consentService.approveConsent(consent)?.subscribe((data) => {
             this.modalService.displayOkDialog('Consent Approved', '');
-            window.location.reload();
+            let currentUrl = this.router.url;
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => {
+                this.router.navigate([currentUrl]);
+              });
           });
         }
       });
@@ -41,7 +46,6 @@ export class PendingConsentsComponent implements OnInit {
     if (this.globalService.currentCredentials) {
       this.consentService.getConsents()?.subscribe((data: any) => {
         this.pendingConsentList = data;
-        console.log(this.pendingConsentList);
       });
     }
   }

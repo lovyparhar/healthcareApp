@@ -93,16 +93,21 @@
     style="background-color: rgb(236, 236, 236)"
   >
     <div class="col-md-8 mt-2">
-      <h2>Record List</h2>
+      <div class="row p-3 m-2">
+        <h2 class = "col-md-3">Record List</h2>
+        <button
+          class="col-md-1 btn btn-info text-center text-white"
+          (click)="fetchRecords()"
+        >
+          <i class="fa fa-refresh"></i>
+        </button>
+      </div>
     </div>
     <div class="col-md-4 mt-2">
-      <button class="btn btn-info text-center text-white" (click)="fetchRecords()">
-        Refresh to get Data
-      </button>
       <button
       *ngIf="recordList"
         type="submit"
-        class="btn btn-info text-center text-danger me-1"
+        class="btn btn-info text-center text-white bg-danger me-1"
         [disabled]="recordList.length == 0"
         (click)="clearRecords()"
       >

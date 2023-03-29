@@ -91,9 +91,17 @@ export class MedicalRecordsComponent implements OnInit {
         this.getRecordsForm.value.sourcehospital,
         this.getRecordsForm.value.department
       )
-      ?.subscribe((data) => {
-        console.log(data);
-      });
+      ?.subscribe(
+        (data) => {
+          this.modalService.displayOkDialog(
+            'Data Arriving soon.',
+            'Please use refresh button below to get records '
+          );
+        },
+        (error) => {
+          this.modalService.displayError(error);
+        }
+      );
 
     this.getRecordsFormDirective.resetForm();
     this.getRecordsForm.reset({
@@ -108,9 +116,25 @@ export class MedicalRecordsComponent implements OnInit {
     });
   }
   clearRecords() {
-    this.consentService.clearRecords()?.subscribe((data) => {
-      window.location.reload();
-    });
+    this.modalService
+      .confirmationDialog(
+        'Confirm',
+        'Are you sure you want to clear all requested records?'
+      )
+      ?.subscribe((res) => {
+        if (res === 'y') {
+          this.consentService.clearRecords()?.subscribe((data) => {
+            this.modalService.displayOkDialog('Records Cleared', '');
+            // window.location.reload();
+            let currentUrl = this.router.url;
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => {
+                this.router.navigate([currentUrl]);
+              });
+          });
+        }
+      });
   }
   ngOnInit(): void {}
 }
