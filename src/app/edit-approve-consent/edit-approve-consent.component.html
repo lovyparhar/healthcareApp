@@ -1,0 +1,110 @@
+<div class="container">
+    <div class="row justify-content-center row-content">
+      <div class="col-md-6">
+        <div class="card">
+          <div *ngIf="consent" class="card-header text-center text-white bg-info">
+            <h2>Edit and Approve Consent</h2>
+          </div>
+  
+          <div class="card-body">
+            <!-- FORM STARTS HERE -->
+            <div class="card mb-4">
+                <div class="card-header text-center text-white bg-info">
+                  Consent Details
+                </div>
+                <div class="card-body">
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Record Sending Hospital :</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ consent.sourceHospitalId }}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Department :</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ consent.department }}</p>
+                    </div>
+                  </div>
+                  <hr>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Record Requesting Hospital :</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ consent.destinationHospitalId }}</p>
+                    </div>
+                  </div>
+                  <hr />
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">Start Time :</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ consent.startTime }}</p>
+                    </div>
+                  </div>
+                  <div class="row">
+                    <div class="col-sm-3">
+                      <p class="mb-0">End Time :</p>
+                    </div>
+                    <div class="col-sm-9">
+                      <p class="text-muted mb-0">{{ consent.endTime }}</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            <form
+              novalidate
+              [formGroup]="editApproveConsentForm"
+              #fform="ngForm"
+              (ngSubmit)="editApprove()"
+            >
+            <div
+            class="form-group row form-row align-items-center justify-content-center"
+          >
+            <div class="col-12 form-label">
+              <label for="enddate">Specify Ending Date and Time</label>
+            </div>
+
+            <div class="col-12">
+              <input
+                name="enddate"
+                matInput
+                type="datetime-local"
+                formControlName="enddate"
+                [ngClass]="{
+                  'form-control': true,
+                  'is-invalid': formErrors.enddate
+                }"
+                id="enddate"
+                required
+                placeholder="End Date"
+              />
+            </div>
+            <span *ngIf="formErrors.enddate" class="text-danger">
+              {{ formErrors.enddate }}
+            </span>
+          </div>
+
+              <div class="form-group row form-row mt-3">
+                <div class="col-12">
+                  <button
+                    type="submit"
+                    class="btn btn-info col-12"
+                    [disabled]="editApproveConsentForm.invalid"
+                  >
+                    Approve Consent
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  

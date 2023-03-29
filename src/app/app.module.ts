@@ -8,7 +8,7 @@ import { FooterComponent } from './footer/footer.component';
 
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CommonModule } from '@angular/common';
+import { CommonModule, DatePipe } from '@angular/common';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { MatListModule } from '@angular/material/list';
 import { MatIconModule } from '@angular/material/icon';
@@ -33,6 +33,7 @@ import { NavigationComponent } from './navigation/navigation.component';
 import { ChangePasswordComponent } from './change-password/change-password.component';
 import { ResetPasswordComponent } from './reset-password/reset-password.component';
 import { ResetPasswordOTPComponent } from './reset-password-otp/reset-password-otp.component';
+import { EditApproveConsentComponent } from './edit-approve-consent/edit-approve-consent.component';
 
 @NgModule({
   declarations: [
@@ -51,6 +52,7 @@ import { ResetPasswordOTPComponent } from './reset-password-otp/reset-password-o
     ChangePasswordComponent,
     ResetPasswordComponent,
     ResetPasswordOTPComponent,
+    EditApproveConsentComponent,
   ],
   imports: [
     BrowserModule,
@@ -79,6 +81,8 @@ import { ResetPasswordOTPComponent } from './reset-password-otp/reset-password-o
     },
     MatDatepickerModule,
     MatNativeDateModule,
+    DatePipe
+
   ],
   bootstrap: [AppComponent],
 })

@@ -42,6 +42,9 @@ export class PendingConsentsComponent implements OnInit {
         }
       });
   }
+  editApproveConsent(consent: any) {
+    this.router.navigate(['/editapproveconsent'], { state: consent });
+  }
   ngOnInit(): void {
     if (this.globalService.currentCredentials) {
       this.consentService.getConsents()?.subscribe((data: any) => {
