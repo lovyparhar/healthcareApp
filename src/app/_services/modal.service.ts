@@ -23,6 +23,25 @@ export class ModalService {
 
     return dialogRef.afterClosed();
   }
+  displayApproveConsentDialog(dtitle: string, dmessage: string) {
+    const dialogRef = this.dialog.open(InfoDialogComponent,
+      {
+        data: { title: dtitle, message: dmessage, yesNoButtons: false, okButton: false, approveConsent: true },
+        width: '60rem'
+      }
+    );
+
+    return dialogRef.afterClosed().pipe(
+      map((result: any) => {
+        if(result && result.ynSelection && result.ynSelection === 1) {
+          return "Approve";
+        }
+        else {
+          return "Edit&Approve";
+        }
+      })
+    );
+  }
 
   displayError(err: HttpErrorResponse, ttle: string = '') {
     let title = !ttle ? 'Oops: Something Went Wrong !!' : ttle;

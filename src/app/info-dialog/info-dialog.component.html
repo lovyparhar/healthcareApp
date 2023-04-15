@@ -22,4 +22,16 @@
             <button class="btn btn-info col-12" (click)="okSelected()">Ok</button>
         </div>
     </div>
+
+    <div *ngIf="data.approveConsent" class="row justify-content-center mt-4">
+        <div class="col-sm-4 text-center">
+            <button class="btn btn-info col-12" (click)="okSelected()">Ok</button>
+        </div>
+        <div class="col-sm-4 text-center">
+            <button class="btn col-12 btn-success" (click)="ynSelected(1)">Approve</button>
+        </div>
+        <div class="col-sm-4 text-center">
+            <button class="btn col-12 btn-warning" (click)="ynSelected(0)">Edit & Approve</button>
+        </div>
+    </div>
 </div>

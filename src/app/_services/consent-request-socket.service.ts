@@ -3,6 +3,8 @@ import * as Stomp from 'stompjs';
 import * as SockJS from 'sockjs-client';
 import { GlobalService } from './global.service';
 import { ModalService } from './modal.service';
+import { ConsentService } from './consent.service';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +15,9 @@ export class ConsentRequestSocketService {
 
   constructor(
     private globalService: GlobalService,
-    private modalService: ModalService
+    private modalService: ModalService,
+    private consentService: ConsentService,
+    private router: Router
   ) {}
 
   initializeWebSocketConnection() {
@@ -46,14 +50,36 @@ export class ConsentRequestSocketService {
     let data = JSON.parse(message.body);
     // console.log(data);
 
-    let dmessage = `Consent Request received from Hospital:  
-    ${data.destinationHospitalId} for accessing your data from the <br><b>Hospital: 
+    let dmessage = `Consent Request received from <b>Hospital:  
+    ${data.destinationHospitalId}</b> for accessing your data from the <br><b>Hospital: 
     ${data.sourceHospitalId}, Department: ${data.department}, till ${data.endTime}</b><br>
-     You can approved the consent by going to Pending Consents on Dashboard`;
-    this.modalService.displayOkDialog(
-      `<div class="text-warning"> Consent Request Received </div>`,
-      dmessage
-    );
+     You can approve the consent by going to Pending Consents on Dashboard`;
+    this.modalService
+      .displayApproveConsentDialog(
+        `<div class="text-warning"> Consent Request Received </div>`,
+        dmessage
+      )
+      .subscribe((res) => {
+        if (res === 'Approve') {
+          this.modalService
+            .confirmationDialog(
+              'Confirm',
+              'Are you sure you want to approve this consent?'
+            )
+            ?.subscribe((res) => {
+              if (res === 'y') {
+                this.consentService
+                  .approveConsent(data)
+                  ?.subscribe((res) => {
+                    this.modalService.displayOkDialog('Consent Approved', '');
+                  });
+              }
+            });
+        }
+        else{
+          this.router.navigate(['/editapproveconsent'], { state: data });
+        }
+      });
     // this.globalService.addRecord(data);
   }
 }
