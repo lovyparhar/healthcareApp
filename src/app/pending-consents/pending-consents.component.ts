@@ -42,6 +42,27 @@ export class PendingConsentsComponent implements OnInit {
         }
       });
   }
+  rejectConsent(consent: any) {
+    console.log(consent);
+    this.modalService
+      .confirmationDialog(
+        'Confirm',
+        'Are you sure you want to reject this consent?'
+      )
+      ?.subscribe((res) => {
+        if (res === 'y') {
+          this.consentService.rejectConsent(consent)?.subscribe((data) => {
+            this.modalService.displayOkDialog('Consent rejected', '');
+            let currentUrl = this.router.url;
+            this.router
+              .navigateByUrl('/', { skipLocationChange: true })
+              .then(() => {
+                this.router.navigate([currentUrl]);
+              });
+          });
+        }
+      });
+  }
   editApproveConsent(consent: any) {
     this.router.navigate(['/editapproveconsent'], { state: consent });
   }

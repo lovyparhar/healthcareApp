@@ -50,6 +50,13 @@ export class ConsentService {
       { responseType: 'text' }
     );
   }
+  rejectConsent(consent: any){
+    if (!this.globalService.currentCredentials) return;
+    console.log(consent);
+    let postUrl = this.globalService.patientRootUrl + '/consent/delete-record/' + consent.id;
+    return this.http.delete(postUrl);
+  }
+
   compose_consent(
     sourceHospitalId: string,
     destinationHospitalId: string,
