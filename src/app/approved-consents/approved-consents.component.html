@@ -3,12 +3,12 @@
   style="background-color: rgb(236, 236, 236)"
 >
   <div class="text-center">
-    <h2>Pending Consents List</h2>
+    <h2>Approved Consents List</h2>
   </div>
 
   <div
     class="col-md-10 m-2"
-    *ngFor="let consent of pendingConsentList; let i = index"
+    *ngFor="let consent of approvedConsentList; let i = index"
   >
     <div class="card mb-4">
       <div class="card-header text-center text-white bg-info">
@@ -59,9 +59,7 @@
         </div>
         <hr/>
         <div class="row justify-content-center">
-          <button class = "btn btn-warning col-sm-2 m-2 border-0" (click)="editApproveConsent(consent)">Edit and Approve Consent</button>
-          <button class = "btn btn-success col-sm-2 m-2 border-0" (click)="approveConsent(consent)">Approve Consent</button>
-          <button class = "btn btn-danger col-sm-2 m-2 border-0" (click)="rejectConsent(consent)">Reject Consent</button>
+          <button class = "btn btn-danger col-sm-2 m-2 border-0" (click)="revokeConsent(consent)">Revoke Consent</button>
         </div>
       </div>
     </div>

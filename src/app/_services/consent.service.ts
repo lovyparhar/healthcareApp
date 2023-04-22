@@ -52,9 +52,14 @@ export class ConsentService {
   }
   rejectConsent(consent: any){
     if (!this.globalService.currentCredentials) return;
-    console.log(consent);
     let postUrl = this.globalService.patientRootUrl + '/consent/delete-record/' + consent.id;
     return this.http.delete(postUrl);
+  }
+  
+  revokeConsent(consent: any){
+    if (!this.globalService.currentCredentials) return;
+    let postUrl = this.globalService.patientRootUrl + '/consent/revoke-consent/' + consent.id;
+    return this.http.get(postUrl);
   }
 
   compose_consent(
@@ -87,6 +92,13 @@ export class ConsentService {
       this.globalService.patientRootUrl + '/consent/getPendingConsents';
     return this.http.get(postUrl);
   }
+
+  getApprovedConsents() {
+    let postUrl =
+      this.globalService.patientRootUrl + '/consent/getApprovedConsents';
+    return this.http.get(postUrl);
+  }
+
   clearRecords() {
     let postUrl =
       this.globalService.patientRootUrl + '/consent/clear-records';

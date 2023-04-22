@@ -11,6 +11,7 @@ import { ResetPasswordOTPComponent } from './reset-password-otp/reset-password-o
 import { EditApproveConsentComponent } from './edit-approve-consent/edit-approve-consent.component';
 import { AuthGuard } from './auth.gaurd';
 import { LoggedInGaurd } from './loggedin.gaurd';
+import { ApprovedConsentsComponent } from './approved-consents/approved-consents.component';
 
 export const routes: Routes = [
   { path: 'home', component: HomeComponent, canActivate: [LoggedInGaurd] },
@@ -19,6 +20,7 @@ export const routes: Routes = [
   { path: 'medicalrecords', component: MedicalRecordsComponent, canActivate: [AuthGuard]  },
   { path: 'composeconsent', component: ComposeConsentComponent, canActivate: [AuthGuard]  },
   { path: 'pendingconsents', component: PendingConsentsComponent, canActivate: [AuthGuard]  },
+  { path: 'approvedconsents', component: ApprovedConsentsComponent, canActivate: [AuthGuard]  },
   { path: 'register', component: PatientRegisterComponent },
   { path: 'dashboard', component: PatientDashboardComponent, canActivate: [AuthGuard]  },
   { path: 'change_password', component: ChangePasswordComponent },
