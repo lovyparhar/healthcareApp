@@ -1,74 +1,47 @@
-import {
-  Component,
-  OnInit,
-  EventEmitter,
-  Inject,
-  Input,
-  Output,
-  ViewChild,
-} from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { GlobalService } from '../_services/global.service';
 import { ModalService } from '../_services/modal.service';
+import { ConsentService } from '../_services/consent.service';
 import { PatientAuthenticationService } from '../_services/patient-authentication.service';
 
 @Component({
-  selector: 'app-patient-register',
-  templateUrl: './patient-register.component.html',
-  styleUrls: ['./patient-register.component.scss'],
+  selector: 'app-register-password',
+  templateUrl: './register-password.component.html',
+  styleUrls: ['./register-password.component.scss'],
 })
-export class PatientRegisterComponent implements OnInit {
+export class RegisterPasswordComponent implements OnInit {
+  state: any;
   registerForm!: FormGroup;
   @ViewChild('fform') registerFormDirective!: any;
-  state: any;
 
   formErrors: any = {
-    firstName: '',
-    lastName: '',
-    email: '',
-    aadhar: '',
     password: '',
   };
 
   validationMessages: any = {
-    firstName: {
-      required: 'First name is required.',
-    },
-    lastName: {
-      required: 'Last Name is required.',
-    },
-    email: {
-      required: 'Email is required.',
-    },
-    aadhar: {
-      required: 'aadhar is required.',
-    },
     password: {
-      required: 'Password is required.',
+      required: 'password is required.',
     },
   };
-
   constructor(
     private authenticationService: PatientAuthenticationService,
     private router: Router,
+    private consentservice: ConsentService,
     private globalService: GlobalService,
     private formBuilder: FormBuilder,
     private modalService: ModalService
-  ) {
-    this.createForm();
+  ) {}
+
+  ngOnInit(): void {
     this.state = this.router.getCurrentNavigation()?.extras.state;
 
-    if (this.state && this.state.aadhar) {
-      this.registerForm.get('aadhar')!.setValue(this.state.aadhar);
-    }
+    this.createForm();
+    console.log(this.router.getCurrentNavigation());
   }
   createForm(): void {
     this.registerForm = this.formBuilder.group({
-      firstName: ['', [Validators.required]],
-      lastName: ['', [Validators.required]],
-      email: ['', [Validators.required, Validators.email]],
-      aadhar: ['', [Validators.required]],
       password: ['', [Validators.required]],
     });
 
@@ -102,41 +75,56 @@ export class PatientRegisterComponent implements OnInit {
     }
   }
 
-  register() {
-    let firstName = this.registerForm.value.firstName;
-    let lastName = this.registerForm.value.lastName;
-    let email = this.registerForm.value.email;
-    let aadhar = this.registerForm.value.aadhar;
+  record() {
+    let firstname = this.state.firstname;
+    let lastname = this.state.lastname;
+    let email = this.state.email;
+    let dateOfBirth = this.state.dateOfBirth;
+    let phoneNumber = this.state.phoneNumber;
     let password = this.registerForm.value.password;
+    let aadhar = this.state.aadhar;
 
     this.registerFormDirective.resetForm();
     this.registerForm.reset({
-      firstName: '',
-      lastName: '',
-      email: '',
-      aadhar: '',
       password: '',
     });
 
-    // this.authenticationService
-    //   .register(firstName, lastName, email, aadhar, password)
-    //   .subscribe(
-    //     (data: any) => {
-    //       this.postregister();
-    //       this.modalService.displayOkDialog('register Successful!', '');
-    //     },
-    //     (error: any) => {
-    //       console.log(error);
-    //       // this.modalService.displayOkDialog(
-    //       //   'register Error',
-    //       //   'The username/password is not valid.'
-    //       // );
-    //     }
-    //   );
+    this.authenticationService
+      .register(
+        firstname,
+        lastname,
+        email,
+        aadhar,
+        password,
+        dateOfBirth,
+        phoneNumber
+      )
+      .subscribe(
+        (data: any) => {
+          this.authenticationService
+            .registerdemographic(
+              firstname,
+              lastname,
+              aadhar,
+              dateOfBirth,
+              phoneNumber
+            )
+            .subscribe(
+              (data: any) => {
+                this.modalService.displayOkDialog(
+                  'User Registered Successfully!',
+                  ''
+                );
+                this.router.navigate(['/login']);
+              },
+              (error: any) => {
+                this.modalService.displayError(error);
+              }
+            );
+        },
+        (error: any) => {
+          this.modalService.displayError(error);
+        }
+      );
   }
-  postregister()
-  {
-    this.router.navigate(['home']);
-  }
-  ngOnInit(): void {}
 }

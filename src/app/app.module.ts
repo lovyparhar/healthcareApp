@@ -35,6 +35,10 @@ import { ResetPasswordComponent } from './reset-password/reset-password.componen
 import { ResetPasswordOTPComponent } from './reset-password-otp/reset-password-otp.component';
 import { EditApproveConsentComponent } from './edit-approve-consent/edit-approve-consent.component';
 import { ApprovedConsentsComponent } from './approved-consents/approved-consents.component';
+import { VerifyPatientComponent } from './verify-patient/verify-patient.component';
+import { VerifyOTPComponent } from './verify-otp/verify-otp.component';
+import { SendOTPComponent } from './send-otp/send-otp.component';
+import { RegisterPasswordComponent } from './register-password/register-password.component';
 
 @NgModule({
   declarations: [
@@ -55,6 +59,10 @@ import { ApprovedConsentsComponent } from './approved-consents/approved-consents
     ResetPasswordOTPComponent,
     EditApproveConsentComponent,
     ApprovedConsentsComponent,
+    VerifyPatientComponent,
+    VerifyOTPComponent,
+    SendOTPComponent,
+    RegisterPasswordComponent,
   ],
   imports: [
     BrowserModule,

@@ -41,12 +41,6 @@
               </span>
             </div>
 
-            <div class="row">
-              <div class="col-12 ms-3">
-                <a routerLink="/reset_password" style="padding-left: 0; padding-right: 0">Forgot Password?</a>
-              </div>
-            </div>
-
             <div class="form-group row form-row mt-3">
               <div class="col-12">
                 <button type="submit" class="btn btn-info col-12 text-center text-white" [disabled]="loginForm.invalid">
@@ -55,13 +49,14 @@
               </div>
             </div>
 
-            <div class="row register-link">
-              <div class="col-12">
-                New user?
-                <a routerLink="/register" style="padding-left: 0; padding-right: 0">Register</a>
-              </div>
-            </div>
           </form>
+        </div>
+        <div class="card-footer text-muted">
+          New user?
+                <a routerLink="/verifypatient" style="padding-left: 0; padding-right: 0">Register</a>
+                <br>
+                <a routerLink="/reset_password" style="padding-left: 0; padding-right: 0">Forgot Password?</a>
+
         </div>
       </div>
     </div>

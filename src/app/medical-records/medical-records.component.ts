@@ -106,7 +106,7 @@ export class MedicalRecordsComponent implements OnInit {
     this.getRecordsFormDirective.resetForm();
     this.getRecordsForm.reset({
       sourcehospital: '',
-      department: '',
+      department: this.departments[0],
     });
   }
   fetchRecords() {

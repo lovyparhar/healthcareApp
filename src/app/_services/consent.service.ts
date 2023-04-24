@@ -46,6 +46,7 @@ export class ConsentService {
         department: consent.department,
         startTime: consent.startTime,
         endTime: consent.endTime,
+        doctorId: consent.doctorId
       },
       { responseType: 'text' }
     );

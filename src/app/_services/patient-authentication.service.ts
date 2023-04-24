@@ -39,7 +39,9 @@ export class PatientAuthenticationService {
     lastname: string,
     email: string,
     aadhar: string,
-    password: string
+    password: string,
+    dateOfBirth: string,
+    phoneNumber: string
   ) {
     let postUrl = this.globalService.patientRootUrl + '/auth/register';
     console.log(postUrl);
@@ -51,27 +53,55 @@ export class PatientAuthenticationService {
         aadhar: aadhar,
         password: password,
         email: email,
-        dateOfBirth: "24/08/2000"
+        dateOfBirth: dateOfBirth,
+        phoneNumber: phoneNumber
       })
       .pipe(
         map((credentials) => {
-          console.log('The aadhar and password', aadhar, ' ', password);
-          console.log('The Credentials is ', credentials);
+          // login successful if there's a jwt token in the response
+          return credentials;
+        })
+      );
+  }
+  registerdemographic(
+    firstname: string,
+    lastname: string,
+    aadhar: string,
+    dateOfBirth: string,
+    phoneNumber: string
+  ) {
+    let postUrl = this.globalService.patientRootUrl + '/auth/add-user-demographic';
+    console.log(postUrl);
 
+    return this.http
+      .post<any>(postUrl, {
+        firstname: firstname,
+        lastname: lastname,
+        aadhar: aadhar,
+        dateOfBirth: dateOfBirth,
+        phoneNumber: phoneNumber
+      })
+      .pipe(
+        map((credentials) => {
           // login successful if there's a jwt token in the response
           return credentials;
         })
       );
   }
 
-  hello() {
-    let postUrl = this.globalService.patientRootUrl + '/hello';
-    console.log(postUrl);
+  verifyPatient(aadhar: string) {
+    let postUrl =
+      this.globalService.patientRootUrl + '/auth/get-user-demographic';
+    console.log(postUrl, aadhar);
 
-    return this.http
-      .get<any>(postUrl);
+    return this.http.post<any>(postUrl, { aadhar: aadhar });
   }
+  verifyOTP(otp: string, aadhar: string) {
+    let postUrl =
+      this.globalService.patientRootUrl + '/auth/verify-generic-otp';
 
+    return this.http.post<any>(postUrl, { aadhar: aadhar , otp: otp});
+  }
   change_password(new_password: string) {
     let postUrl = this.globalService.patientRootUrl + '/auth/change-password';
     console.log(postUrl);
