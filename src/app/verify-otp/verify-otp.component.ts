@@ -88,11 +88,10 @@ export class VerifyOTPComponent implements OnInit {
           this.router.navigate(['/registerpassword'], {
             state: data,
           });
-        }
-        else
-        {
+        } else if (this.state.phoneNumber) {
+          console.log(this.state.phoneNumber);
           this.router.navigate(['/register'], {
-            state: this.state.phoneNumber,
+            state: { phoneNumber: this.state.phoneNumber },
           });
         }
       },

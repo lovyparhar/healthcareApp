@@ -113,7 +113,7 @@ export class PatientRegisterComponent implements OnInit {
     let password = this.registerForm.value.password;
     let dob = this.registerForm.value.dob;
     let phoneNumber = this.state.phoneNumber;
-
+    console.log(phoneNumber);
     const [year, month, day] = dob.split('-');
     const formattedDateISO = `${year}-${month}-${day}T00:00:00`;
     const formattedDatedmy = `${day}/${month}/${year}`;
@@ -164,10 +164,6 @@ export class PatientRegisterComponent implements OnInit {
           this.modalService.displayError(error);
         }
       );
-  }
-  postregister()
-  {
-    this.router.navigate(['home']);
   }
   ngOnInit(): void {}
 }

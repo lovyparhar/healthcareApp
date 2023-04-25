@@ -107,26 +107,11 @@ export class RegisterPasswordComponent implements OnInit {
       )
       .subscribe(
         (data: any) => {
-          this.authenticationService
-            .registerdemographic(
-              firstname,
-              lastname,
-              aadhar,
-              dateOfBirth,
-              phoneNumber
-            )
-            .subscribe(
-              (data: any) => {
-                this.modalService.displayOkDialog(
-                  'User Registered Successfully!',
-                  ''
-                );
-                this.router.navigate(['/login']);
-              },
-              (error: any) => {
-                this.modalService.displayError(error);
-              }
-            );
+          this.modalService.displayOkDialog(
+            'User Registered Successfully!',
+            ''
+          );
+          this.router.navigate(['/login']);
         },
         (error: any) => {
           this.modalService.displayError(error);

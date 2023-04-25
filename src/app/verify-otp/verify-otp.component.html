@@ -36,7 +36,10 @@
   
             </form>
           </div>
-          <div class="card-footer text-muted">
+          <div *ngIf="this.state.newPatient" class="card-footer text-muted">
+            Please enter OTP sent to the given Phone Number.
+          </div>
+          <div *ngIf="!this.state.newPatient" class="card-footer text-muted">
             Please enter OTP sent to the Aadhaar-Linked Phone Number.
           </div>
         </div>

@@ -76,8 +76,8 @@ export class PatientAuthenticationService {
 
     return this.http
       .post<any>(postUrl, {
-        firstname: firstname,
-        lastname: lastname,
+        firstName: firstname,
+        lastName: lastname,
         aadhar: aadhar,
         dateOfBirth: dateOfBirth,
         phoneNumber: phoneNumber,
