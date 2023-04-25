@@ -18,11 +18,15 @@ export class RegisterPasswordComponent implements OnInit {
 
   formErrors: any = {
     password: '',
+    email: '',
   };
 
   validationMessages: any = {
     password: {
       required: 'password is required.',
+    },
+    email: {
+      required: 'email is required.',
     },
   };
   constructor(
@@ -32,17 +36,16 @@ export class RegisterPasswordComponent implements OnInit {
     private globalService: GlobalService,
     private formBuilder: FormBuilder,
     private modalService: ModalService
-  ) {}
-
-  ngOnInit(): void {
+  ) {
     this.state = this.router.getCurrentNavigation()?.extras.state;
-
     this.createForm();
-    console.log(this.router.getCurrentNavigation());
   }
+
+  ngOnInit(): void {}
   createForm(): void {
     this.registerForm = this.formBuilder.group({
       password: ['', [Validators.required]],
+      email: ['', [Validators.required]],
     });
 
     this.registerForm.valueChanges.subscribe((data) =>
@@ -76,10 +79,12 @@ export class RegisterPasswordComponent implements OnInit {
   }
 
   record() {
-    let firstname = this.state.firstname;
-    let lastname = this.state.lastname;
-    let email = this.state.email;
+    let firstname = this.state.firstName;
+    let lastname = this.state.lastName;
+    let email = this.registerForm.value.email;
     let dateOfBirth = this.state.dateOfBirth;
+    let date = new Date(dateOfBirth);
+    let formattedDate = date.toLocaleDateString('en-GB');
     let phoneNumber = this.state.phoneNumber;
     let password = this.registerForm.value.password;
     let aadhar = this.state.aadhar;
@@ -87,6 +92,7 @@ export class RegisterPasswordComponent implements OnInit {
     this.registerFormDirective.resetForm();
     this.registerForm.reset({
       password: '',
+      email: '',
     });
 
     this.authenticationService
@@ -96,7 +102,7 @@ export class RegisterPasswordComponent implements OnInit {
         email,
         aadhar,
         password,
-        dateOfBirth,
+        formattedDate,
         phoneNumber
       )
       .subscribe(

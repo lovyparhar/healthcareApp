@@ -71,23 +71,28 @@ export class VerifyOTPComponent implements OnInit {
   }
   verifyOTP() {
     let otp = this.verifyPatientForm.value.otp;
-    let aadhar = this.state.aadhar;
     this.verifyPatientFormDirective.resetForm();
     this.verifyPatientForm.reset({
       otp: '',
     });
 
-    this.authenticationService.verifyOTP(otp, aadhar).subscribe(
+    this.authenticationService.verifyOTP(otp, this.state).subscribe(
       (data: any) => {
         this.modalService.displayOkDialog(
           'OTP Verified!',
           'Please create a password for your account.'
         );
 
-        if (data) {
+        if (!this.state.newPatient && data) {
           console.log(data);
           this.router.navigate(['/registerpassword'], {
             state: data,
+          });
+        }
+        else
+        {
+          this.router.navigate(['/register'], {
+            state: this.state.phoneNumber,
           });
         }
       },
@@ -101,7 +106,7 @@ export class VerifyOTPComponent implements OnInit {
         this.router
           .navigateByUrl('/', { skipLocationChange: true })
           .then(() => {
-            this.router.navigate([currentUrl], { state: { aadhar: aadhar } });
+            this.router.navigate([currentUrl], { state: this.state });
           });
       }
     );

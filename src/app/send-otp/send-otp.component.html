@@ -1,1 +1,46 @@
-<p>send-otp works!</p>
+
+
+<div class="container">
+    <div class="row justify-content-center row-content">
+      <div class="col-md-6">
+        <div class="card">
+          <div class="card-header text-center text-white bg-info">
+            <h2>Send OTP Form</h2>
+          </div>
+  
+          <div class="card-body">
+            <!-- FORM STARTS HERE -->
+            <form novalidate [formGroup]="sendOTPForm" #fform="ngForm" (ngSubmit)="sendOTP()">
+              <div class="form-group row form-row align-items-center justify-content-center">
+                <div class="col-12 form-label">
+                  <label for="phoneNumber">Phone Number</label>
+                </div>
+  
+                <div class="col-12">
+                  <input name="phoneNumber" type="text" formControlName="phoneNumber" [ngClass]="{
+                      'form-control': true,
+                      'is-invalid': formErrors.phoneNumber
+                    }" id="phoneNumber" required placeholder="Phone Number" />
+                </div>
+                <span *ngIf="formErrors.phoneNumber" class="text-danger">
+                  {{ formErrors.phoneNumber }}
+                </span>
+              </div>
+  
+              <div class="form-group row form-row mt-3">
+                <div class="col-12">
+                  <button type="submit" class="btn btn-info col-12 text-center text-white" [disabled]="sendOTPForm.invalid">
+                    Send OTP
+                  </button>
+                </div>
+              </div>
+  
+            </form>
+          </div>
+          <div class="card-footer text-muted">
+            Provide your phone number to be verified using OTP.
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>

@@ -54,7 +54,7 @@ export class PatientAuthenticationService {
         password: password,
         email: email,
         dateOfBirth: dateOfBirth,
-        phoneNumber: phoneNumber
+        phoneNumber: phoneNumber,
       })
       .pipe(
         map((credentials) => {
@@ -70,7 +70,8 @@ export class PatientAuthenticationService {
     dateOfBirth: string,
     phoneNumber: string
   ) {
-    let postUrl = this.globalService.patientRootUrl + '/auth/add-user-demographic';
+    let postUrl =
+      this.globalService.patientRootUrl + '/auth/add-user-demographic';
     console.log(postUrl);
 
     return this.http
@@ -79,7 +80,7 @@ export class PatientAuthenticationService {
         lastname: lastname,
         aadhar: aadhar,
         dateOfBirth: dateOfBirth,
-        phoneNumber: phoneNumber
+        phoneNumber: phoneNumber,
       })
       .pipe(
         map((credentials) => {
@@ -96,34 +97,54 @@ export class PatientAuthenticationService {
 
     return this.http.post<any>(postUrl, { aadhar: aadhar });
   }
-  verifyOTP(otp: string, aadhar: string) {
+  sendOTP(phoneNumber: string) {
+    let postUrl = this.globalService.patientRootUrl + '/auth/send-generic-otp';
+    console.log(postUrl, phoneNumber);
+
+    return this.http.post<any>(postUrl, { phoneNumber: phoneNumber });
+  }
+  verifyOTP(otp: string, state: any) {
     let postUrl =
       this.globalService.patientRootUrl + '/auth/verify-generic-otp';
 
-    return this.http.post<any>(postUrl, { aadhar: aadhar , otp: otp});
+    if (state.newPatient) {
+      return this.http.post<any>(postUrl, { phoneNumber: state.phoneNumber, otp: otp });
+    } else {
+      return this.http.post<any>(postUrl, { aadhar: state.aadhar, otp: otp });
+    }
   }
   change_password(new_password: string) {
     let postUrl = this.globalService.patientRootUrl + '/auth/change-password';
     console.log(postUrl);
 
-    return this.http
-      .post<any>(postUrl, {password: new_password });
+    return this.http.post<any>(postUrl, { password: new_password });
   }
 
   reset_password(aadhar: string, mobile: string) {
     let postUrl = this.globalService.patientRootUrl + '/auth/send-otp';
     console.log(postUrl);
 
-    return this.http
-      .post<any>(postUrl, { aadhar: aadhar, phoneNumber: mobile });
+    return this.http.post<any>(postUrl, {
+      aadhar: aadhar,
+      phoneNumber: mobile,
+    });
   }
 
-  verify_reset_otp(phoneNumber:string, otp:string, password:string, aadhar:string) {
+  verify_reset_otp(
+    phoneNumber: string,
+    otp: string,
+    password: string,
+    aadhar: string
+  ) {
     let postUrl = this.globalService.patientRootUrl + '/auth/verify-otp';
     console.log(postUrl);
 
-    return this.http
-      .patch<any>(postUrl, { phoneNumber:phoneNumber, otp:otp, password:password, aadhar:aadhar });
+    return this.http.patch<any>(postUrl, {
+      phoneNumber: phoneNumber,
+      otp: otp,
+      password: password,
+      aadhar: aadhar,
+    });
   }
 
   logout() {

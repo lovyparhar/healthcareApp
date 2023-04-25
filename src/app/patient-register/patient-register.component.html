@@ -93,6 +93,31 @@
               class="form-group row form-row align-items-center justify-content-center"
             >
               <div class="col-12 form-label">
+                <label for="dob">Date of Birth</label>
+              </div>
+
+              <div class="col-12">
+                <input
+                  name="dob"
+                  type="date"
+                  formControlName="dob"
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': formErrors.dob
+                  }"
+                  id="dob"
+                  required
+                  placeholder="dob"
+                />
+              </div>
+              <span *ngIf="formErrors.dob" class="text-danger">
+                {{ formErrors.dob }}
+              </span>
+            </div>
+            <div
+              class="form-group row form-row align-items-center justify-content-center"
+            >
+              <div class="col-12 form-label">
                 <label for="aadhar">Aadhaar</label>
               </div>
 

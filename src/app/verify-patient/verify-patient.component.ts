@@ -83,7 +83,7 @@ export class VerifyPatientComponent implements OnInit {
           );
 
           this.router.navigate(['/verifyotp'], {
-            state: { aadhar: aadhar }, //sending patient data and role.
+            state: { aadhar: aadhar, newPatient: false }, //sending patient data and role.
           });
         
       },

@@ -29,6 +29,7 @@ export class PatientRegisterComponent implements OnInit {
     email: '',
     aadhar: '',
     password: '',
+    dob: ''
   };
 
   validationMessages: any = {
@@ -47,6 +48,9 @@ export class PatientRegisterComponent implements OnInit {
     password: {
       required: 'Password is required.',
     },
+    dob: {
+      required: 'Date of Birth is required.',
+    },
   };
 
   constructor(
@@ -58,10 +62,7 @@ export class PatientRegisterComponent implements OnInit {
   ) {
     this.createForm();
     this.state = this.router.getCurrentNavigation()?.extras.state;
-
-    if (this.state && this.state.aadhar) {
-      this.registerForm.get('aadhar')!.setValue(this.state.aadhar);
-    }
+    
   }
   createForm(): void {
     this.registerForm = this.formBuilder.group({
@@ -70,6 +71,8 @@ export class PatientRegisterComponent implements OnInit {
       email: ['', [Validators.required, Validators.email]],
       aadhar: ['', [Validators.required]],
       password: ['', [Validators.required]],
+      dob: ['', [Validators.required]],
+
     });
 
     this.registerForm.valueChanges.subscribe((data) =>
@@ -108,6 +111,12 @@ export class PatientRegisterComponent implements OnInit {
     let email = this.registerForm.value.email;
     let aadhar = this.registerForm.value.aadhar;
     let password = this.registerForm.value.password;
+    let dob = this.registerForm.value.dob;
+    let phoneNumber = this.state.phoneNumber;
+
+    const [year, month, day] = dob.split('-');
+    const formattedDateISO = `${year}-${month}-${day}T00:00:00`;
+    const formattedDatedmy = `${day}/${month}/${year}`;
 
     this.registerFormDirective.resetForm();
     this.registerForm.reset({
@@ -118,21 +127,43 @@ export class PatientRegisterComponent implements OnInit {
       password: '',
     });
 
-    // this.authenticationService
-    //   .register(firstName, lastName, email, aadhar, password)
-    //   .subscribe(
-    //     (data: any) => {
-    //       this.postregister();
-    //       this.modalService.displayOkDialog('register Successful!', '');
-    //     },
-    //     (error: any) => {
-    //       console.log(error);
-    //       // this.modalService.displayOkDialog(
-    //       //   'register Error',
-    //       //   'The username/password is not valid.'
-    //       // );
-    //     }
-    //   );
+    this.authenticationService
+      .register(
+        firstName,
+        lastName,
+        email,
+        aadhar,
+        password,
+        formattedDatedmy,
+        phoneNumber
+      )
+      .subscribe(
+        (data: any) => {
+          this.authenticationService
+            .registerdemographic(
+              firstName,
+              lastName,
+              aadhar,
+              formattedDateISO,
+              phoneNumber
+            )
+            .subscribe(
+              (data: any) => {
+                this.modalService.displayOkDialog(
+                  'User Registered Successfully!',
+                  ''
+                );
+                this.router.navigate(['/login']);
+              },
+              (error: any) => {
+                this.modalService.displayError(error);
+              }
+            );
+        },
+        (error: any) => {
+          this.modalService.displayError(error);
+        }
+      );
   }
   postregister()
   {
