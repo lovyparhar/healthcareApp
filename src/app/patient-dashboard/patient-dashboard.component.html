@@ -1,52 +1,26 @@
 <div class="container">
-  <div class="row">
-    <div class="col-md-6">
-      <div class="row justify-content-center row-content p-2">
-        <div class="col-md-6">
-          <a class="btn btn-info col-12 position-relative p-3 mb-5 text-white fw-bold" routerLink="/medicalrecords">
-            <div class="card-body text-center">Medical Records</div>
-          </a>
-        </div>
-        <div class="col-md-6">
-          <a class="btn btn-info col-12 position-relative p-3 mb-5 text-white fw-bold" routerLink="/composeconsent">
-            <div class="card-body text-center">Compose Consent</div>
-          </a>
-        </div>
-      </div>
-      <div class="row justify-content-center row-content p-2">
-        <div class="col-md-6">
-          <a class="btn btn-info col-12 position-relative p-3 mb-5 text-white fw-bold" routerLink="/pendingconsents">
-            <div class="card-body text-center">Pending Consents</div>
-          </a>
-        </div>
-        <div class="col-md-6">
-          <a class="btn btn-info col-12 position-relative p-3 mb-5 text-white fw-bold" routerLink="/approvedconsents">
-            <div class="card-body text-center">Approved Consents</div>
-          </a>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-6">
+  <div class="row justify-content-center">
+    <div class="col-md-8">
       <div class="card mb-4 shadow-lg">
         <div class="card-header text-center text-white bg-info fw-bold">
           Patient Details
         </div>
-        <div class="card-body">
+        <div class="card-body text-center">
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-6">
               <p class="mb-0">First Name</p>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-6">
               <p class="text-muted mb-0">
                 {{ globalservice.currentCredentials.firstname }}
               </p>
             </div>
           </div>
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-6">
               <p class="mb-0">Last Name</p>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-6">
               <p class="text-muted mb-0">
                 {{ globalservice.currentCredentials.lastname }}
               </p>
@@ -54,21 +28,31 @@
           </div>
           <hr />
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-6">
               <p class="mb-0">Aadhar Number</p>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-6">
               <p class="text-muted mb-0">
                 {{ globalservice.currentCredentials.aadhar }}
               </p>
             </div>
           </div>
+          <div class="row">
+            <div class="col-sm-6">
+              <p class="mb-0">Age</p>
+            </div>
+            <div class="col-sm-6">
+              <p class="text-muted mb-0">
+                {{ globalservice.currentCredentials.age }}
+              </p>
+            </div>
+          </div>
           <hr />
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-6">
               <p class="mb-0">Email</p>
             </div>
-            <div class="col-sm-9">
+            <div class="col-sm-6">
               <p class="text-muted mb-0">
                 {{ globalservice.currentCredentials.email }}
               </p>
@@ -76,12 +60,38 @@
           </div>
           <hr />
           <div class="row">
-            <div class="col-sm-3">
+            <div class="col-sm-6">
               <p class="mb-0">Mobile</p>
             </div>
-            <div class="col-sm-9">
-              <p class="text-muted mb-0">{{globalservice.currentCredentials.phoneNumber}}</p>
+            <div class="col-sm-6">
+              <p class="text-muted mb-0">
+                {{ globalservice.currentCredentials.phoneNumber }}
+              </p>
             </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="col-md-12">
+      <div class="row justify-content-center row-content p-4">
+        <div class="pointer card bg-info square-card mx-3" routerLink="/medicalrecords">
+          <div class="card-body text-center text-white d-flex fw-bold align-items-center">
+              <h4>Medical Records</h4>
+          </div>
+        </div>
+        <div class="pointer card bg-info square-card mx-3" routerLink="/composeconsent">
+          <div class="card-body text-center text-white d-flex fw-bold align-items-center">
+              <h4>Compose Consent</h4>
+          </div>
+        </div>
+        <div class="pointer card bg-info square-card mx-3" routerLink="/pendingconsents">
+          <div class="card-body text-center text-white d-flex fw-bold align-items-center">
+              <h4>Pending Consents</h4>
+          </div>
+        </div>
+        <div class="pointer card bg-info square-card mx-3" routerLink="/approvedconsents">
+          <div class="card-body text-center text-white d-flex fw-bold align-items-center">
+              <h4>Approved Consents</h4>
           </div>
         </div>
       </div>
