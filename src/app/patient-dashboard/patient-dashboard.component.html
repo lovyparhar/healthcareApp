@@ -1,5 +1,51 @@
 <div class="container">
   <div class="row justify-content-center">
+    <div class="col-md-12">
+      <div class="row justify-content-center row-content p-3">
+        <div
+          class="pointer card bg-info square-card mx-3"
+          routerLink="/medicalrecords"
+        >
+          <div
+            class="card-body text-center text-white d-flex fw-bold align-items-center"
+          >
+            <h4>Medical Records</h4>
+          </div>
+        </div>
+        <div
+          class="pointer card bg-info square-card mx-3"
+          routerLink="/composeconsent"
+        >
+          <div
+            class="card-body text-center text-white d-flex fw-bold align-items-center"
+          >
+            <h4>Compose Consent</h4>
+          </div>
+        </div>
+        <div
+          class="pointer card bg-info square-card mx-3"
+          routerLink="/pendingconsents"
+        >
+          <div
+            class="card-body text-center text-white d-flex fw-bold align-items-center"
+          >
+            <h4>Pending Consents</h4>
+          </div>
+        </div>
+        <div
+          class="pointer card bg-info square-card mx-3"
+          routerLink="/approvedconsents"
+        >
+          <div
+            class="card-body text-center text-white d-flex fw-bold align-items-center"
+          >
+            <h4>Approved Consents</h4>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="row justify-content-center p-3">
     <div class="col-md-8">
       <div class="card mb-4 shadow-lg">
         <div class="card-header text-center text-white bg-info fw-bold">
@@ -68,30 +114,6 @@
                 {{ globalservice.currentCredentials.phoneNumber }}
               </p>
             </div>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="col-md-12">
-      <div class="row justify-content-center row-content p-4">
-        <div class="pointer card bg-info square-card mx-3" routerLink="/medicalrecords">
-          <div class="card-body text-center text-white d-flex fw-bold align-items-center">
-              <h4>Medical Records</h4>
-          </div>
-        </div>
-        <div class="pointer card bg-info square-card mx-3" routerLink="/composeconsent">
-          <div class="card-body text-center text-white d-flex fw-bold align-items-center">
-              <h4>Compose Consent</h4>
-          </div>
-        </div>
-        <div class="pointer card bg-info square-card mx-3" routerLink="/pendingconsents">
-          <div class="card-body text-center text-white d-flex fw-bold align-items-center">
-              <h4>Pending Consents</h4>
-          </div>
-        </div>
-        <div class="pointer card bg-info square-card mx-3" routerLink="/approvedconsents">
-          <div class="card-body text-center text-white d-flex fw-bold align-items-center">
-              <h4>Approved Consents</h4>
           </div>
         </div>
       </div>
