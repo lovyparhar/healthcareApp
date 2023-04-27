@@ -14,6 +14,31 @@
             #fform="ngForm"
             (ngSubmit)="register()"
           >
+          <div
+              class="form-group row form-row align-items-center justify-content-center"
+            >
+              <div class="col-12 form-label">
+                <label for="aadhar">Aadhaar</label>
+              </div>
+
+              <div class="col-12">
+                <input
+                  name="aadhar"
+                  type="text"
+                  formControlName="aadhar"
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': formErrors.aadhar
+                  }"
+                  id="aadhar"
+                  required
+                  placeholder="Aadhaar Number"
+                />
+              </div>
+              <span *ngIf="formErrors.aadhar" class="text-danger">
+                {{ formErrors.aadhar }}
+              </span>
+            </div>
             <div
               class="form-group row form-row align-items-center justify-content-center"
             >
@@ -135,32 +160,6 @@
               class="form-group row form-row align-items-center justify-content-center"
             >
               <div class="col-12 form-label">
-                <label for="aadhar">Aadhaar</label>
-              </div>
-
-              <div class="col-12">
-                <input
-                  name="aadhar"
-                  type="text"
-                  formControlName="aadhar"
-                  [ngClass]="{
-                    'form-control': true,
-                    'is-invalid': formErrors.aadhar
-                  }"
-                  id="aadhar"
-                  required
-                  placeholder="Aadhaar Number"
-                />
-              </div>
-              <span *ngIf="formErrors.aadhar" class="text-danger">
-                {{ formErrors.aadhar }}
-              </span>
-            </div>
-
-            <div
-              class="form-group row form-row align-items-center justify-content-center"
-            >
-              <div class="col-12 form-label">
                 <label for="password">Password</label>
               </div>
 
@@ -179,6 +178,54 @@
               </div>
               <span *ngIf="formErrors.password" class="text-danger">
                 {{ formErrors.password }}
+              </span>
+            </div>
+            <div
+              class="form-group row form-row align-items-center justify-content-center"
+            >
+              <div class="col-12 form-label">
+                <label for="godFatherName">Guardian Name</label>
+              </div>
+
+              <div class="col-12">
+                <input
+                  name="godFatherName"
+                  type="godFatherName"
+                  formControlName="godFatherName"
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': formErrors.godFatherName
+                  }"
+                  id="godFatherName"
+                  placeholder="Gaurdian Name"
+                />
+              </div>
+              <span *ngIf="formErrors.godFatherName" class="text-danger">
+                {{ formErrors.godFatherName }}
+              </span>
+            </div>
+            <div
+              class="form-group row form-row align-items-center justify-content-center"
+            >
+              <div class="col-12 form-label">
+                <label for="godFatherNumber">Gaurdian Phone Number</label>
+              </div>
+
+              <div class="col-12">
+                <input
+                  name="godFatherNumber"
+                  type="godFatherNumber"
+                  formControlName="godFatherNumber"
+                  [ngClass]="{
+                    'form-control': true,
+                    'is-invalid': formErrors.godFatherNumber
+                  }"
+                  id="godFatherNumber"
+                  placeholder="Phone Number"
+                />
+              </div>
+              <span *ngIf="formErrors.godFatherNumber" class="text-danger">
+                {{ formErrors.godFatherNumber }}
               </span>
             </div>
             <div class="form-group row form-row mt-3">

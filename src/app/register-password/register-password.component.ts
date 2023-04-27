@@ -83,11 +83,15 @@ export class RegisterPasswordComponent implements OnInit {
     let lastname = this.state.lastName;
     let email = this.registerForm.value.email;
     let dateOfBirth = this.state.dateOfBirth;
-    let date = new Date(dateOfBirth);
-    let formattedDate = date.toLocaleDateString('en-GB');
+    
+    const [year, month, day] = dateOfBirth.split('-');
+    const formattedDateISO = `${year}-${month}-${day}T00:00:00`;
+
     let phoneNumber = this.state.phoneNumber;
     let password = this.registerForm.value.password;
     let aadhar = this.state.aadhar;
+    let godFatherName = this.state.godFatherName;
+    let godFatherNumber = this.state.godFatherNumber;
 
     this.registerFormDirective.resetForm();
     this.registerForm.reset({
@@ -102,8 +106,10 @@ export class RegisterPasswordComponent implements OnInit {
         email,
         aadhar,
         password,
-        formattedDate,
-        phoneNumber
+        formattedDateISO,
+        phoneNumber,
+        godFatherName,
+        godFatherNumber
       )
       .subscribe(
         (data: any) => {

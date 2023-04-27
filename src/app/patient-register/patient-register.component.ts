@@ -29,7 +29,9 @@ export class PatientRegisterComponent implements OnInit {
     email: '',
     aadhar: '',
     password: '',
-    dob: ''
+    dob: '',
+    godFatherName: '',
+    godFatherNumber: ''
   };
 
   validationMessages: any = {
@@ -51,6 +53,12 @@ export class PatientRegisterComponent implements OnInit {
     dob: {
       required: 'Date of Birth is required.',
     },
+    godFatherName: {
+      required: 'Gaurdian name is required.',
+    },
+    godFatherNumber: {
+      required: 'Gaurdian Number is required.',
+    },
   };
 
   constructor(
@@ -62,7 +70,6 @@ export class PatientRegisterComponent implements OnInit {
   ) {
     this.createForm();
     this.state = this.router.getCurrentNavigation()?.extras.state;
-    
   }
   createForm(): void {
     this.registerForm = this.formBuilder.group({
@@ -72,6 +79,8 @@ export class PatientRegisterComponent implements OnInit {
       aadhar: ['', [Validators.required]],
       password: ['', [Validators.required]],
       dob: ['', [Validators.required]],
+      godFatherName : ['', [Validators.required]],
+      godFatherNumber: ['', [Validators.required]],
 
     });
 
@@ -112,8 +121,10 @@ export class PatientRegisterComponent implements OnInit {
     let aadhar = this.registerForm.value.aadhar;
     let password = this.registerForm.value.password;
     let dob = this.registerForm.value.dob;
+    let godFatherName = this.registerForm.value.godFatherName;
+    let godFatherNumber = this.registerForm.value.godFatherNumber;
     let phoneNumber = this.state.phoneNumber;
-    console.log(phoneNumber);
+
     const [year, month, day] = dob.split('-');
     const formattedDateISO = `${year}-${month}-${day}T00:00:00`;
     const formattedDatedmy = `${day}/${month}/${year}`;
@@ -125,6 +136,8 @@ export class PatientRegisterComponent implements OnInit {
       email: '',
       aadhar: '',
       password: '',
+      godFatherName: '',
+      godFatherNumber: ''
     });
 
     this.authenticationService
@@ -134,31 +147,18 @@ export class PatientRegisterComponent implements OnInit {
         email,
         aadhar,
         password,
-        formattedDatedmy,
-        phoneNumber
+        formattedDateISO,
+        phoneNumber,
+        godFatherName,
+        godFatherNumber
       )
       .subscribe(
         (data: any) => {
-          this.authenticationService
-            .registerdemographic(
-              firstName,
-              lastName,
-              aadhar,
-              formattedDateISO,
-              phoneNumber
-            )
-            .subscribe(
-              (data: any) => {
-                this.modalService.displayOkDialog(
-                  'User Registered Successfully!',
-                  ''
-                );
-                this.router.navigate(['/login']);
-              },
-              (error: any) => {
-                this.modalService.displayError(error);
-              }
-            );
+          this.modalService.displayOkDialog(
+            'User Registered Successfully!',
+            ''
+          );
+          this.router.navigate(['/login']);
         },
         (error: any) => {
           this.modalService.displayError(error);

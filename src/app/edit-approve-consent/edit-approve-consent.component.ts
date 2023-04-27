@@ -38,6 +38,10 @@ export class EditApproveConsentComponent implements OnInit {
   ) {
     this.createForm();
     this.consent = this.router.getCurrentNavigation()?.extras.state;
+    if(!this.consent)
+    {
+      router.navigate(['/dashboard']);
+    }
   }
   createForm(): void {
     this.editApproveConsentForm = this.formBuilder.group({

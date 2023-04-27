@@ -41,7 +41,9 @@ export class PatientAuthenticationService {
     aadhar: string,
     password: string,
     dateOfBirth: string,
-    phoneNumber: string
+    phoneNumber: string,
+    godFatherName: string,
+    godFatherNumber: string
   ) {
     let postUrl = this.globalService.patientRootUrl + '/auth/register';
     console.log(postUrl);
@@ -55,6 +57,8 @@ export class PatientAuthenticationService {
         email: email,
         dateOfBirth: dateOfBirth,
         phoneNumber: phoneNumber,
+        godFatherName: godFatherName,
+        godFatherNumber: godFatherNumber,
       })
       .pipe(
         map((credentials) => {
@@ -108,7 +112,10 @@ export class PatientAuthenticationService {
       this.globalService.patientRootUrl + '/auth/verify-generic-otp';
 
     if (state.newPatient) {
-      return this.http.post<any>(postUrl, { phoneNumber: state.phoneNumber, otp: otp });
+      return this.http.post<any>(postUrl, {
+        phoneNumber: state.phoneNumber,
+        otp: otp,
+      });
     } else {
       return this.http.post<any>(postUrl, { aadhar: state.aadhar, otp: otp });
     }
