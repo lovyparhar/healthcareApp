@@ -83,9 +83,9 @@ export class RegisterPasswordComponent implements OnInit {
     let lastname = this.state.lastName;
     let email = this.registerForm.value.email;
     let dateOfBirth = this.state.dateOfBirth;
-    
-    const [year, month, day] = dateOfBirth.split('-');
-    const formattedDateISO = `${year}-${month}-${day}T00:00:00`;
+
+    // const [year, month, day] = dateOfBirth.split('-');
+    // const formattedDateISO = `${year}-${month}-${day}T00:00:00`;
 
     let phoneNumber = this.state.phoneNumber;
     let password = this.registerForm.value.password;
@@ -106,7 +106,7 @@ export class RegisterPasswordComponent implements OnInit {
         email,
         aadhar,
         password,
-        formattedDateISO,
+        dateOfBirth,
         phoneNumber,
         godFatherName,
         godFatherNumber

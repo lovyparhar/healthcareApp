@@ -27,11 +27,10 @@ export class PatientRegisterComponent implements OnInit {
     firstName: '',
     lastName: '',
     email: '',
-    aadhar: '',
     password: '',
     dob: '',
     godFatherName: '',
-    godFatherNumber: ''
+    godFatherNumber: '',
   };
 
   validationMessages: any = {
@@ -44,9 +43,7 @@ export class PatientRegisterComponent implements OnInit {
     email: {
       required: 'Email is required.',
     },
-    aadhar: {
-      required: 'aadhar is required.',
-    },
+
     password: {
       required: 'Password is required.',
     },
@@ -76,12 +73,10 @@ export class PatientRegisterComponent implements OnInit {
       firstName: ['', [Validators.required]],
       lastName: ['', [Validators.required]],
       email: ['', [Validators.required, Validators.email]],
-      aadhar: ['', [Validators.required]],
       password: ['', [Validators.required]],
       dob: ['', [Validators.required]],
-      godFatherName : ['', [Validators.required]],
+      godFatherName: ['', [Validators.required]],
       godFatherNumber: ['', [Validators.required]],
-
     });
 
     this.registerForm.valueChanges.subscribe((data) =>
@@ -118,7 +113,7 @@ export class PatientRegisterComponent implements OnInit {
     let firstName = this.registerForm.value.firstName;
     let lastName = this.registerForm.value.lastName;
     let email = this.registerForm.value.email;
-    let aadhar = this.registerForm.value.aadhar;
+    let aadhar = this.state.aadhar;
     let password = this.registerForm.value.password;
     let dob = this.registerForm.value.dob;
     let godFatherName = this.registerForm.value.godFatherName;
@@ -134,10 +129,9 @@ export class PatientRegisterComponent implements OnInit {
       firstName: '',
       lastName: '',
       email: '',
-      aadhar: '',
       password: '',
       godFatherName: '',
-      godFatherNumber: ''
+      godFatherNumber: '',
     });
 
     this.authenticationService

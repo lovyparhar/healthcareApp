@@ -32,6 +32,7 @@ export class SendOTPComponent implements OnInit {
     private modalService: ModalService
   ) {
     this.createForm();
+    this.state = this.router.getCurrentNavigation()?.extras.state;
   }
   createForm(): void {
     this.sendOTPForm = this.formBuilder.group({
@@ -83,7 +84,11 @@ export class SendOTPComponent implements OnInit {
         );
 
         this.router.navigate(['/verifyotp'], {
-          state: { phoneNumber: phoneNumber, newPatient: true }, //sending patient data and role.
+          state: {
+            phoneNumber: phoneNumber,
+            newPatient: true,
+            aadhar: this.state.aadhar,
+          }, //sending patient data and role.
         });
       },
       (error: any) => {

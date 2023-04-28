@@ -31,7 +31,7 @@
             <p class="text-muted mb-0">{{ consent.department }}</p>
           </div>
         </div>
-        <hr>
+        <hr />
         <div class="row">
           <div class="col-sm-3">
             <p class="mb-0">Record Requesting Hospital :</p>
@@ -43,25 +43,34 @@
         <hr />
         <div class="row">
           <div class="col-sm-3">
-            <p class="mb-0">Start Time :</p>
-          </div>
-          <div class="col-sm-9">
-            <p class="text-muted mb-0">{{ consent.startTime.slice(0, 10) }}  {{consent.startTime.slice(12)}}</p>
-          </div>
-        </div>
-        <div class="row">
-          <div class="col-sm-3">
             <p class="mb-0">End Time :</p>
           </div>
           <div class="col-sm-9">
-            <p class="text-muted mb-0">{{ consent.endTime.slice(0, 10) }}  {{consent.endTime.slice(12)}}</p>
+            <p class="text-muted mb-0">
+              {{ consent.endTime.slice(0, 10) }} {{ consent.endTime.slice(12) }}
+            </p>
           </div>
         </div>
-        <hr/>
+        <hr />
         <div class="row justify-content-center">
-          <button class = "btn btn-warning col-sm-2 m-2 border-0" (click)="editApproveConsent(consent)">Edit and Approve Consent</button>
-          <button class = "btn btn-success col-sm-2 m-2 border-0" (click)="approveConsent(consent)">Approve Consent</button>
-          <button class = "btn btn-danger col-sm-2 m-2 border-0" (click)="rejectConsent(consent)">Reject Consent</button>
+          <button
+            class="btn btn-warning col-sm-2 m-2 border-0"
+            (click)="editApproveConsent(consent)"
+          >
+            Edit and Approve Consent
+          </button>
+          <button
+            class="btn btn-success col-sm-2 m-2 border-0"
+            (click)="approveConsent(consent)"
+          >
+            Approve Consent
+          </button>
+          <button
+            class="btn btn-danger col-sm-2 m-2 border-0"
+            (click)="rejectConsent(consent)"
+          >
+            Reject Consent
+          </button>
         </div>
       </div>
     </div>

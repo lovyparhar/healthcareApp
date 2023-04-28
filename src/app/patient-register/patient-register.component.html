@@ -14,7 +14,7 @@
             #fform="ngForm"
             (ngSubmit)="register()"
           >
-          <div
+            <div
               class="form-group row form-row align-items-center justify-content-center"
             >
               <div class="col-12 form-label">
@@ -25,19 +25,11 @@
                 <input
                   name="aadhar"
                   type="text"
-                  formControlName="aadhar"
-                  [ngClass]="{
-                    'form-control': true,
-                    'is-invalid': formErrors.aadhar
-                  }"
                   id="aadhar"
-                  required
-                  placeholder="Aadhaar Number"
+                  placeholder="{{ this.state.aadhar }}"
+                  disabled
                 />
               </div>
-              <span *ngIf="formErrors.aadhar" class="text-danger">
-                {{ formErrors.aadhar }}
-              </span>
             </div>
             <div
               class="form-group row form-row align-items-center justify-content-center"
@@ -126,7 +118,7 @@
                   name="dob"
                   type="text"
                   id="dob"
-                  placeholder= {{this.state.phoneNumber}}
+                  placeholder="{{ this.state.phoneNumber }}"
                   disabled
                 />
               </div>

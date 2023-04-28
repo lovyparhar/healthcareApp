@@ -77,15 +77,14 @@ export class VerifyPatientComponent implements OnInit {
 
     this.authenticationService.verifyPatient(aadhar).subscribe(
       (data: any) => {
-          this.modalService.displayOkDialog(
-            'User Found!',
-            'Please enter the OTP sent to the registered number.'
-          );
+        this.modalService.displayOkDialog(
+          'User Found!',
+          'Please enter the OTP sent to the registered number.'
+        );
 
-          this.router.navigate(['/verifyotp'], {
-            state: { aadhar: aadhar, newPatient: false }, //sending patient data and role.
-          });
-        
+        this.router.navigate(['/verifyotp'], {
+          state: { aadhar: aadhar, newPatient: false }, //sending patient data and role.
+        });
       },
       (error: any) => {
         // console.log(error);
@@ -93,7 +92,7 @@ export class VerifyPatientComponent implements OnInit {
           'User Not Found!',
           'Please register a new user using phone number.'
         );
-        this.router.navigate(['/sendotp']);
+        this.router.navigate(['/sendotp'], { state: { aadhar: aadhar } });
       }
     );
   }

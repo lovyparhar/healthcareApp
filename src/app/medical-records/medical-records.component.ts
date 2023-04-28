@@ -32,7 +32,16 @@ export class MedicalRecordsComponent implements OnInit {
     },
   };
   sourceHospitals: any = ['H1', 'H2'];
-  departments: any = ['All departments', 'Radiology', 'Urology', 'Oncology'];
+  departments: any = [
+    'Enter any department',
+    'Radiology',
+    'Urology',
+    'Oncology',
+    'Gynaecology',
+    'Orthopaedics',
+    'Cardiology',
+    'Neurology',
+  ];
 
   constructor(
     private authenticationService: PatientAuthenticationService,

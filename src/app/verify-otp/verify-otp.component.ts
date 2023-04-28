@@ -91,7 +91,10 @@ export class VerifyOTPComponent implements OnInit {
         } else if (this.state.phoneNumber) {
           console.log(this.state.phoneNumber);
           this.router.navigate(['/register'], {
-            state: { phoneNumber: this.state.phoneNumber },
+            state: {
+              phoneNumber: this.state.phoneNumber,
+              aadhar: this.state.aadhar,
+            },
           });
         }
       },
