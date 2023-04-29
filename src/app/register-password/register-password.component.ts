@@ -5,6 +5,7 @@ import { GlobalService } from '../_services/global.service';
 import { ModalService } from '../_services/modal.service';
 import { ConsentService } from '../_services/consent.service';
 import { PatientAuthenticationService } from '../_services/patient-authentication.service';
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'app-register-password',
@@ -89,6 +90,10 @@ export class RegisterPasswordComponent implements OnInit {
 
     let phoneNumber = this.state.phoneNumber;
     let password = this.registerForm.value.password;
+
+    const salt = bcrypt.genSaltSync(10);
+    let pass = bcrypt.hashSync(password, salt);
+
     let aadhar = this.state.aadhar;
     let godFatherName = this.state.godFatherName;
     let godFatherNumber = this.state.godFatherNumber;
@@ -105,7 +110,7 @@ export class RegisterPasswordComponent implements OnInit {
         lastname,
         email,
         aadhar,
-        password,
+        pass,
         dateOfBirth,
         phoneNumber,
         godFatherName,

@@ -13,6 +13,7 @@ import { GlobalService } from '../_services/global.service';
 import { ModalService } from '../_services/modal.service';
 import { PatientAuthenticationService } from '../_services/patient-authentication.service';
 import { ConsentRequestSocketService } from '../_services/consent-request-socket.service';
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'app-patient-login',
@@ -94,13 +95,16 @@ export class PatientLoginComponent implements OnInit {
     let aadhar = this.loginForm.value.aadhar;
     let password = this.loginForm.value.password;
 
+    const salt = bcrypt.genSaltSync(10);
+    let pass = bcrypt.hashSync(password, salt);
+
     this.loginFormDirective.resetForm();
     this.loginForm.reset({
       aadhar: '',
       password: '',
     });
 
-    this.authenticationService.login(aadhar, password).subscribe(
+    this.authenticationService.login(aadhar, pass).subscribe(
       (data: any) => {
         this.postLogin();
         this.modalService.displayOkDialog('Login Successful!', '');
@@ -116,9 +120,8 @@ export class PatientLoginComponent implements OnInit {
     // }
   }
 
-  postLogin()
-  {
-    console.log("Hello dashboard");
+  postLogin() {
+    console.log('Hello dashboard');
     this.router.navigate(['dashboard']);
 
     // Set up a socket connection here
@@ -130,5 +133,5 @@ export class PatientLoginComponent implements OnInit {
     this.consentRequestSocketService.closeWebSocketConnection();
   }
 
-  ngOnInit(): void { }
+  ngOnInit(): void {}
 }

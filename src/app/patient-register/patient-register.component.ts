@@ -12,6 +12,7 @@ import { Router } from '@angular/router';
 import { GlobalService } from '../_services/global.service';
 import { ModalService } from '../_services/modal.service';
 import { PatientAuthenticationService } from '../_services/patient-authentication.service';
+import * as bcrypt from 'bcryptjs';
 
 @Component({
   selector: 'app-patient-register',
@@ -115,6 +116,10 @@ export class PatientRegisterComponent implements OnInit {
     let email = this.registerForm.value.email;
     let aadhar = this.state.aadhar;
     let password = this.registerForm.value.password;
+
+    const salt = bcrypt.genSaltSync(10);
+    let pass = bcrypt.hashSync(password, salt);
+
     let dob = this.registerForm.value.dob;
     let godFatherName = this.registerForm.value.godFatherName;
     let godFatherNumber = this.registerForm.value.godFatherNumber;
@@ -140,7 +145,7 @@ export class PatientRegisterComponent implements OnInit {
         lastName,
         email,
         aadhar,
-        password,
+        pass,
         formattedDateISO,
         phoneNumber,
         godFatherName,

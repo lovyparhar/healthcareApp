@@ -19,6 +19,8 @@
     "@angular/platform-browser": "^14.2.0",
     "@angular/platform-browser-dynamic": "^14.2.0",
     "@angular/router": "^14.2.0",
+    "@types/bcryptjs": "^2.4.2",
+    "bcryptjs": "^2.4.3",
     "bootstrap": "^5.2.3",
     "font-awesome": "^4.7.0",
     "net": "^1.0.2",
